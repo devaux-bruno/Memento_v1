@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Comments
@@ -36,7 +37,7 @@ class Comments
     private $commentStatus;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="comment_created_at", type="datetime", nullable=false)
      */
@@ -61,6 +62,116 @@ class Comments
      * })
      */
     private $commentArticle;
+
+    /**
+     * @return int
+     */
+    public function getCommentId()
+    {
+        return $this->commentId;
+    }
+
+    /**
+     * @param int $commentId
+     * @return Comments
+     */
+    public function setCommentId($commentId)
+    {
+        $this->commentId = $commentId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentText()
+    {
+        return $this->commentText;
+    }
+
+    /**
+     * @param string $commentText
+     * @return Comments
+     */
+    public function setCommentText($commentText)
+    {
+        $this->commentText = $commentText;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentStatus()
+    {
+        return $this->commentStatus;
+    }
+
+    /**
+     * @param string $commentStatus
+     * @return Comments
+     */
+    public function setCommentStatus($commentStatus)
+    {
+        $this->commentStatus = $commentStatus;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCommentCreatedAt()
+    {
+        return $this->commentCreatedAt;
+    }
+
+    /**
+     * @param DateTime $commentCreatedAt
+     * @return Comments
+     */
+    public function setCommentCreatedAt($commentCreatedAt)
+    {
+        $this->commentCreatedAt = $commentCreatedAt;
+        return $this;
+    }
+
+    /**
+     * @return Users
+     */
+    public function getCommentUser()
+    {
+        return $this->commentUser;
+    }
+
+    /**
+     * @param Users $commentUser
+     * @return Comments
+     */
+    public function setCommentUser($commentUser)
+    {
+        $this->commentUser = $commentUser;
+        return $this;
+    }
+
+    /**
+     * @return Articles
+     */
+    public function getCommentArticle()
+    {
+        return $this->commentArticle;
+    }
+
+    /**
+     * @param Articles $commentArticle
+     * @return Comments
+     */
+    public function setCommentArticle($commentArticle)
+    {
+        $this->commentArticle = $commentArticle;
+        return $this;
+    }
+
+
 
 
 }
