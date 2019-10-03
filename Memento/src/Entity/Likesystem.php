@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Likesystem
@@ -29,7 +30,7 @@ class Likesystem
     private $likeNote;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="like_created_at", type="datetime", nullable=false)
      */
@@ -54,6 +55,100 @@ class Likesystem
      * })
      */
     private $likeArticle;
+
+    /**
+     * @return int
+     */
+    public function getLikeId()
+    {
+        return $this->likeId;
+    }
+
+    /**
+     * @param int $likeId
+     * @return Likesystem
+     */
+    public function setLikeId($likeId)
+    {
+        $this->likeId = $likeId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLikeNote()
+    {
+        return $this->likeNote;
+    }
+
+    /**
+     * @param string $likeNote
+     * @return Likesystem
+     */
+    public function setLikeNote($likeNote)
+    {
+        $this->likeNote = $likeNote;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getLikeCreatedAt()
+    {
+        return $this->likeCreatedAt;
+    }
+
+    /**
+     * @param DateTime $likeCreatedAt
+     * @return Likesystem
+     */
+    public function setLikeCreatedAt($likeCreatedAt)
+    {
+        $this->likeCreatedAt = $likeCreatedAt;
+        return $this;
+    }
+
+    /**
+     * @return Users
+     */
+    public function getLikeUser()
+    {
+        return $this->likeUser;
+    }
+
+    /**
+     * @param Users $likeUser
+     * @return Likesystem
+     */
+    public function setLikeUser($likeUser)
+    {
+        $this->likeUser = $likeUser;
+        return $this;
+    }
+
+    /**
+     * @return Articles
+     */
+    public function getLikeArticle()
+    {
+        return $this->likeArticle;
+    }
+
+    /**
+     * @param Articles $likeArticle
+     * @return Likesystem
+     */
+    public function setLikeArticle($likeArticle)
+    {
+        $this->likeArticle = $likeArticle;
+        return $this;
+    }
+
+
+
+
 
 
 }

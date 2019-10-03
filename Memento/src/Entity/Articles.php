@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Articles
@@ -50,9 +51,9 @@ class Articles
     private $articleText;
 
     /**
-     * @var int
+     * @var DateTime
      *
-     * @ORM\Column(name="article_create_at", type="integer", nullable=false)
+     * @ORM\Column(name="article_create_at", type="datetime", nullable=false)
      */
     private $articleCreateAt;
 
@@ -92,5 +93,206 @@ class Articles
      * @ORM\OneToMany(targetEntity="Likesystem", mappedBy="articleId")
      */
     private $articlesLikesystem;
+
+    /**
+     * @return int
+     */
+    public function getArticleId()
+    {
+        return $this->articleId;
+    }
+
+    /**
+     * @param int $articleId
+     * @return Articles
+     */
+    public function setArticleId($articleId)
+    {
+        $this->articleId = $articleId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleValid()
+    {
+        return $this->articleValid;
+    }
+
+    /**
+     * @param string $articleValid
+     * @return Articles
+     */
+    public function setArticleValid($articleValid)
+    {
+        $this->articleValid = $articleValid;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getArticlePicture()
+    {
+        return $this->articlePicture;
+    }
+
+    /**
+     * @param string|null $articlePicture
+     * @return Articles
+     */
+    public function setArticlePicture($articlePicture)
+    {
+        $this->articlePicture = $articlePicture;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleDescription()
+    {
+        return $this->articleDescription;
+    }
+
+    /**
+     * @param string $articleDescription
+     * @return Articles
+     */
+    public function setArticleDescription($articleDescription)
+    {
+        $this->articleDescription = $articleDescription;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArticleText()
+    {
+        return $this->articleText;
+    }
+
+    /**
+     * @param int $articleText
+     * @return Articles
+     */
+    public function setArticleText($articleText)
+    {
+        $this->articleText = $articleText;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getArticleCreateAt()
+    {
+        return $this->articleCreateAt;
+    }
+
+    /**
+     * @param DateTime $articleCreateAt
+     * @return Articles
+     */
+    public function setArticleCreateAt($articleCreateAt)
+    {
+        $this->articleCreateAt = $articleCreateAt;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleTitle()
+    {
+        return $this->articleTitle;
+    }
+
+    /**
+     * @param string $articleTitle
+     * @return Articles
+     */
+    public function setArticleTitle($articleTitle)
+    {
+        $this->articleTitle = $articleTitle;
+        return $this;
+    }
+
+    /**
+     * @return Users
+     */
+    public function getArticleUser()
+    {
+        return $this->articleUser;
+    }
+
+    /**
+     * @param Users $articleUser
+     * @return Articles
+     */
+    public function setArticleUser($articleUser)
+    {
+        $this->articleUser = $articleUser;
+        return $this;
+    }
+
+    /**
+     * @return Languages
+     */
+    public function getArticleLanguage()
+    {
+        return $this->articleLanguage;
+    }
+
+    /**
+     * @param Languages $articleLanguage
+     * @return Articles
+     */
+    public function setArticleLanguage($articleLanguage)
+    {
+        $this->articleLanguage = $articleLanguage;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticlesComments()
+    {
+        return $this->articlesComments;
+    }
+
+    /**
+     * @param mixed $articlesComments
+     * @return Articles
+     */
+    public function setArticlesComments($articlesComments)
+    {
+        $this->articlesComments = $articlesComments;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticlesLikesystem()
+    {
+        return $this->articlesLikesystem;
+    }
+
+    /**
+     * @param mixed $articlesLikesystem
+     * @return Articles
+     */
+    public function setArticlesLikesystem($articlesLikesystem)
+    {
+        $this->articlesLikesystem = $articlesLikesystem;
+        return $this;
+    }
+
+
+
 
 }
