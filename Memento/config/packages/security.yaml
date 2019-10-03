@@ -6,7 +6,7 @@ security:
                 property: 'userEmail'
 
     encoders:
-        App\Entity\User:
+        App\Entity\Users:
             algorithm: auto
 
     firewalls:
@@ -15,6 +15,16 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\AppCustomAuthenticator
+            logout:
+                path: app_logout
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                provider: users
+                csrf_token_generator: security.csrf.token_manager
 
 
     role_hierarchy:

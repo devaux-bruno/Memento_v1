@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Inscription</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formAjout) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAjout) }}
+                    <span class="text-danger">{{ form_errors(formAjout.userPseudo) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userEmail) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userPassword) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userFirstname) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userLastname) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userJob) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userBirthday) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userCity) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userPicture) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.userDescription) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userPseudo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userEmail) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userPassword) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userFirstname) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userLastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userJob) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userBirthday) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userCity) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userPicture) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.userDescription) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formAjout) }}
+                        {{ form_row(formAjout.save) }}
+                        {{ form_end(formAjout) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('home') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
