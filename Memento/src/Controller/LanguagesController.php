@@ -132,7 +132,7 @@ class LanguagesController extends AbstractController
         {
 
             if($langId->getLangPicture() != '' || $langId->getLangPicture() != null ){
-                if( !empty($customerpicture)){
+                if( !empty($langPicture)){
                     //suppression de l'ancienne photo
                     $fichierSupp = $this->getParameter('languages_pictures_directory');
                     unlink($fichierSupp.$langPicture);
