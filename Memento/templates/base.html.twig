@@ -11,41 +11,64 @@
     <body>
     {% block nav %}
         <header>
-            <nav class="navbar navbar-expand-md navbar-light" style="background-color: #73d632;">
-                <a class="navbar-brand" href="#"><img class="logo" alt="logo" src=""></a>
+            <nav class="navbar navbar-expand-md navbar-light navcolor">
+                <a class="navbar-brand" href="{{ path('home') }}"><img class="navbarLogo" src="{{ asset('asset/img/logo-memento.png') }}" alt="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarsExample04">
-                    <ul class="navbar-nav mr-auto list-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualités</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="#">Nouveautés</a>
-                                <a class="dropdown-item" href="#">Best Memento</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Langages</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="#">HTML</a>
-                                <a class="dropdown-item" href="#">CSS</a>
-                                <a class="dropdown-item" href="#">JS</a>
-                                <a class="dropdown-item" href="#">PHP</a>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarsExample04">
+                    <div class="row navbar-nav list-nav ">
+                        <div class="col-12 nav-item dropdown inlineFlex">
+                            <a class="dropdown-item" href="#">Nouveautés</a>
+                            <a class="dropdown-item" href="#">Top Mementos</a>
+                            <a class="dropdown-item" href="#">Actualités</a>
+                            <a class="dropdown-item" href="#">Contact</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="iconenav">
                     {% if app.user %}
-                        <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
+                            <ul class="navbar-nav mr-auto list-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% if app.user.userPicture is empty %}
+                                            <img class="userNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
+                                        {% else %}
+                                            <img class="userLogo" src="{{ asset('asset/img/profil/') }}{{ app.user.userPicture }}" alt="picture profil">
+                                        {% endif %}
+                                    </a>
+                                    <div class="dropdown-menu menuPicture" aria-labelledby="dropdown05">
+                                        <a class="dropdown-item" href="#">Mon Profil</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="dropdown-item" href="{{ path('lang_index') }}">Gestion languages</a>
+                                            <a class="dropdown-item" href="#">Gestion comptes</a>
+                                            <a class="dropdown-item" href="#">Gestion articles</a>
+                                            <a class="dropdown-item" href="#">Gestion commentaires</a>
+                                            <a class="dropdown-item" href="#">Statistiques</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
+                                    </div>
+                                </li>
+                            </ul>
                     {% else %}
                         <a class="btn btn-outline-light" href="{{ path('app_login') }}">Connexion</a>
                         <a class="btn btn-outline-light" href="{{ path('user_add') }}">Inscription</a>
                     {% endif %}
                 </div>
             </nav>
+            <div class="row justify-content-center prolongNavbar">
+                <div class="col-12 col-sm-12 col-md-8 center">
+                    <ul class="languagesList">
+                        {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 search">
+                    <form class="form-inline mt-2 mt-md-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher ..." aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img class="btnSearch" src="{{ asset('asset/img/search-solid.svg') }}" alt="Search"></button>
+                    </form>
+                </div>
+            </div>
             {% for message in app.flashes('success') %}
                 <div class="container">
                     <div class="alert alert-success">
