@@ -37,6 +37,21 @@ class Languages
     private $langCreatedAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lang_picture", type="string", length=255, nullable=false)
+     */
+    private $langPicture;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lang_order", type="integer", nullable=false)
+     */
+    private $langOrder;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Articles", mappedBy="langId")
      */
     private $articlesLanguages;
@@ -110,6 +125,42 @@ class Languages
     public function setArticlesLanguages($articlesLanguages)
     {
         $this->articlesLanguages = $articlesLanguages;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLangPicture()
+    {
+        return $this->langPicture;
+    }
+
+    /**
+     * @param string|null $langPicture
+     * @return Languages
+     */
+    public function setLangPicture(string $langPicture)
+    {
+        $this->langPicture = $langPicture;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLangOrder(): int
+    {
+        return $this->langOrder;
+    }
+
+    /**
+     * @param int $langOrder
+     * @return Languages
+     */
+    public function setLangOrder(int $langOrder): Languages
+    {
+        $this->langOrder = $langOrder;
         return $this;
     }
 

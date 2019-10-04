@@ -7,6 +7,7 @@ parameters:
     locale: 'en'
     profil_pictures_directory: '%kernel.project_dir%/public/asset/img/profil/'
     article_pictures_directory: '%kernel.project_dir%/public/asset/img/article/'
+    languages_pictures_directory: '%kernel.project_dir%/public/asset/img/languages/'
 services:
     # default configuration for services in *this* file
     _defaults:

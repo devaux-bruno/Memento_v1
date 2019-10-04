@@ -1,0 +1,7 @@
+{% for languages in resultatshow %}
+    <li>
+        <a href="#">
+            <img class="logoLanguages" src="{{ asset('asset/img/languages/') }}{{ languages.langPicture }}" alt="picture {{ languages.langProgram }}">
+        </a>
+    </li>
+{% endfor %}

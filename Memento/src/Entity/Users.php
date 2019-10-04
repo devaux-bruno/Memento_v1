@@ -310,7 +310,7 @@ class Users implements UserInterface
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUserRegistration()
     {
@@ -318,7 +318,7 @@ class Users implements UserInterface
     }
 
     /**
-     * @param \DateTime $userRegistration
+     * @param DateTime $userRegistration
      * @return Users
      */
     public function setUserRegistration($userRegistration)
@@ -346,7 +346,7 @@ class Users implements UserInterface
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUserBirthday()
     {
@@ -354,7 +354,7 @@ class Users implements UserInterface
     }
 
     /**
-     * @param \DateTime $userBirthday
+     * @param DateTime $userBirthday
      * @return Users
      */
     public function setUserBirthday($userBirthday)

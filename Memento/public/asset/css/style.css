@@ -1,3 +1,16 @@
 /*Général*/
 body{background-color: linen}
 .center{text-align: center}
+
+/*Navbar*/
+.navcolor{background-color: #73d632;}
+.userNoPic{ height: 50px;}
+.menuPicture{left: -110px}
+.navbarLogo{height: 80px;}
+.inlineFlex{display: inline-flex}
+.btnSearch{height: 30px;}
+.languagesList{list-style: none; display: inline-flex;}
+.logoLanguages{max-height: 50px;margin-left: 10px;margin-right: 10px;}
+.prolongNavbar{background-color: #73d632;}
+.search{text-align: end; display: flex;}
+.userLogo{ height: 70px; border-radius: 35px; -moz-border-radius: 35px; -webkit-border-radius: 35px;}

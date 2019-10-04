@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center mt-5 mb-3">Gestion des Laguages de programmation</h2>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('lang_add') }}">Ajouter un languages</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Ordre</th>
+                    <th>Languages</th>
+                    <th>Date de création</th>
+                    <th>Logo</th>
+                    <th width="250px">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for lang in resultatedit %}
+                        <tr>
+                            <td>{{ lang.langId }}</td>
+                            <td>{{ lang.langOrder }}</td>
+                            <td>{{ lang.langProgram }}</td>
+                            <td>{{ lang.langCreatedAt|date('d/m/Y H:m') }}</td>
+                            <td><img class="logoLanguages" src="{{ asset('asset/img/languages/') }}{{ lang.langPicture }}" alt="picture {{ lang.langProgram }}"></td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('admin_lang_edit', {'langId' : lang.langId}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('lang_delete', {'langId' : lang.langId}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}
