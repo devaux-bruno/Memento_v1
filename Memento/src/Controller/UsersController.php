@@ -5,8 +5,11 @@ namespace App\Controller;
 
 
 use App\Entity\Users;
+use App\Form\PasswordType;
 use App\Form\UsersType;
+use App\Form\UserEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -75,6 +78,165 @@ class UsersController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("admin/user", name="user_index")
+     */
+    public function index()
+    {
+        $doctrine = $this->getDoctrine();
+
+        $userRepository = $doctrine->getRepository(Users::class);
+        $resultatedit= $userRepository->findAll();
+
+        return $this->render('admin/index_user.html.twig', ['resultatedit' => $resultatedit]);
+    }
+
+    /**
+     * @Route("/member/profil", name="profil_index")
+     */
+    public function indexProfil()
+    {
+
+        $doctrine = $this->getDoctrine();
+        //$user = $this->getUser();
+
+        $userRepository = $doctrine->getRepository(\App\Entity\Users::class);
+        $resultatuser= $userRepository->findAll();
+
+        return $this->render('member/profil.html.twig', [
+            'resultatuser' => $resultatuser,
+        ]);
+    }
+
+    /**
+     * @Route("/member/userEdit/{userId}", name="user_edit")
+     */
+    public function edit(Request $request, Users $userId)
+    {
+
+        $idUser = $this->getUser()->getUserId();
+        $numIdUser = $userId->getUserId();
+
+        $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
+        $userPicture = $entityManager->getRepository(Users::class)->find($userId)->getUserPicture();
+
+        if($idUser != $numIdUser ) {
+            $this->addFlash('error', 'Vous ne pouvez modifier que votre profil');
+            return $this->redirectToRoute('home',[]);
+        }
+
+        $form = $this->createForm(UserEditType::class, $userId, []);
+        $form->handleRequest($request);
+
+        if( $form->isSubmitted() && $form->isValid())
+        {
+
+            if( !empty($userPicture) ){
+
+                $file = $form->get('userPicture')->getData();
+
+                if( !empty($file) ){
+                    //suppression de l'ancienne photo
+                    $fichierSupp = $this->getParameter('profil_pictures_directory');
+                    unlink($fichierSupp.$userPicture);
+                    $fs = new Filesystem();
+                    $fs->remove($fichierSupp.$userId->getUserPicture());
+
+                    //update de la nouvelle photo
+                    $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+                    try {
+                        $file->move(
+                            $this->getParameter('profil_pictures_directory'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Un problème est survenue sur votre photo lors de la modification!');
+
+                        return $this->redirectToRoute('user_edit', []);
+                    }
+                }
+            }
+            else{
+                $file = $form->get('userPicture')->getData();
+                if( !empty($file) ){
+                    //ajout d'une photo
+                    $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+                    try {
+                        $file->move(
+                            $this->getParameter('profil_pictures_directory'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Un problème est survenue sur votre photo lors de l\'enregistrement!');
+
+                        return $this->redirectToRoute('user_edit', []);
+                    }
+                }
+            }
+
+            $userId->setUserPicture($fileName);
+            $userId->setUserRegistration(new \DateTime()) ;
+            $entityManager->persist($userId);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre profil a bien été modifié!');
+
+            return $this->redirectToRoute('profil_index',[]);
+        }
+        return $this->render('member/user_edit.html.twig',[
+            'formUserEdit' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/member/passwordEdit/{userId}", name="password_edit")
+     */
+    public function editPassword(Request $request, Users $userId, UserPasswordEncoderInterface $encoder)
+    {
+        $idUser = $this->getUser()->getUserId();
+        $numIdUser = $userId->getUserId();
+
+        if($idUser != $numIdUser ) {
+            $this->addFlash('error', 'Vous ne pouvez modifier que votre profil');
+            return $this->redirectToRoute('home',[]);
+        }
+
+        $form = $this->createForm(PasswordType::class, $userId, []);
+        $form->handleRequest($request);
+
+        if( $form->isSubmitted() && $form->isValid())
+        {
+            $dataold = $form->get('oldPassword')->getData();
+            $datanew = $form->get('userPassword')->getData();
+
+            if($encoder->isPasswordValid($userId, $dataold)){
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+
+                $new_password = $encoder->encodePassword($userId, $datanew);
+                $userId->setUserPassword($new_password);
+
+                $entityManager->persist($userId);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre mot de passe a bien été modifié!');
+
+                return $this->redirectToRoute('profil_index',[]);
+            }
+            else{
+                $this->addFlash('error', 'Désolé vous avez été déconnecter car votre ancien mot de passe n\'était pas correcte');
+                return $this->redirectToRoute('password_edit', ['userId' => $idUser]);
+            }
+        }
+
+        return $this->render('member/password_edit.html.twig',[
+            'formUserEdit' => $form->createView(),
+        ]);
+
+    }
 
 
     /**

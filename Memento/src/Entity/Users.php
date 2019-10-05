@@ -490,6 +490,9 @@ class Users implements UserInterface
     }
 
 
-
+    public function getSignature(): ?string
+    {
+        return $this->userFirstname.' '.$this->userLastname;
+    }
 
 }
