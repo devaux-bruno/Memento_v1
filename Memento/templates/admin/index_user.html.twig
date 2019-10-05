@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des membres</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('user_add') }}">Ajouter un membre</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Pseudo / Email <br> Status</th>
+                    <th>Prénom / Nom <br> Date Naissance</th>
+                    <th>Job / Ville <br> Date inscription</th>
+                    <th>Description</th>
+                    <th>Photo</th>
+                    <th width="250px">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for membre in resultatedit %}
+                        <tr>
+                            <td>{{ membre.userId }}</td>
+                            <td>
+                                {{ membre.userPseudo }}
+                                <br>
+                                {{ membre.userEmail }}
+                                <br>
+                                {{ membre.userStatus }}
+                            </td>
+                            <td>
+                                {{ membre.getSignature }}
+                                <br>
+                                {{ membre.userBirthday |date('d/m/Y') }}
+                            </td>
+                            <td>
+                                {{ membre.userJob }}
+                                <br>
+                                {{ membre.userCity }}
+                                <br>
+                                {{ membre.userRegistration |date('d/m/Y H:m:s') }}
+                            </td>
+                            <td>
+                                {{ membre.userDescription | raw }}
+                            </td>
+                            <td>
+                                <img class="logoLanguages" src="{{ asset('asset/img/profil/') }}{{ membre.userPicture }}" alt="picture {{ membre.userPseudo }}">
+                            </td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="#">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="#">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

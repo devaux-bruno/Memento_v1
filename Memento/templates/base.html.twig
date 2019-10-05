@@ -38,10 +38,10 @@
                                         {% endif %}
                                     </a>
                                     <div class="dropdown-menu menuPicture" aria-labelledby="dropdown05">
-                                        <a class="dropdown-item" href="#">Mon Profil</a>
+                                        <a class="dropdown-item" href="{{ path('profil_index') }}">Mon Profil</a>
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a class="dropdown-item" href="{{ path('lang_index') }}">Gestion languages</a>
-                                            <a class="dropdown-item" href="#">Gestion comptes</a>
+                                            <a class="dropdown-item" href="{{ path('user_index') }}">Gestion comptes</a>
                                             <a class="dropdown-item" href="#">Gestion articles</a>
                                             <a class="dropdown-item" href="#">Gestion commentaires</a>
                                             <a class="dropdown-item" href="#">Statistiques</a>

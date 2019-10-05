@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Modifier mon profil</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formUserEdit) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formUserEdit) }}
+                    <span class="text-danger">{{ form_errors(formUserEdit.userPseudo) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userEmail) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userFirstname) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userLastname) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userJob) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userBirthday) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userCity) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userPicture) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.userDescription) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userPseudo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userEmail) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userFirstname) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userLastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userJob) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userBirthday) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userCity) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userPicture) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.userDescription) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formUserEdit) }}
+                        {{ form_row(formUserEdit.save) }}
+                        {{ form_end(formUserEdit) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('profil_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

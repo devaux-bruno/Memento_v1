@@ -11,6 +11,12 @@ body{background-color: linen}
 .btnSearch{height: 30px;}
 .languagesList{list-style: none; display: inline-flex;}
 .logoLanguages{max-height: 50px;margin-left: 10px;margin-right: 10px;}
-.prolongNavbar{background-color: #73d632;}
+.prolongNavbar{background-color: #73d632;margin-right: 0px !important;}
 .search{text-align: end; display: flex;}
 .userLogo{ height: 70px; border-radius: 35px; -moz-border-radius: 35px; -webkit-border-radius: 35px;}
+
+
+/*Pade de Profil*/
+.spanProfil{font-weight: 600; text-decoration: underline; }
+#profilDesc{line-height: 17px;}
+.pictureProfil {max-height: 300px;}
