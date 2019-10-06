@@ -61,6 +61,8 @@ class Users implements UserInterface
      * @var string
      *
      * @ORM\Column(name="user_password", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
     private $userPassword;
 

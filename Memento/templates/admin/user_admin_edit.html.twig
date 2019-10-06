@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Modification du profil : </h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formAdminEdit) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAdminEdit) }}
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userPseudo) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userEmail) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userFirstname) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userLastname) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userJob) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userBirthday) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userCity) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userPicture) }}</span>
+                    <span class="text-danger">{{ form_errors(formAdminEdit.userDescription) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userPseudo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userEmail) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userFirstname) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userLastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userJob) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userBirthday) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userCity) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.userPicture) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(formAdminEdit.userDescription) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminStatus.userStatus) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_row(formAdminEdit.save) }}
+                        {{ form_end(formAdminEdit) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('user_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'user_edit[userDescription]' );
+    </script>
+{% endblock %}
