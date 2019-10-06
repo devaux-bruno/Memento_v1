@@ -1,36 +1,39 @@
 <?php
 
 
-namespace App\Form;
 
+namespace App\Form;
 
 use App\Entity\Users;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class PasswordType extends AbstractType
+class newPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
         $formBuilder
-            ->add('oldPassword',TextType::class, [
+            ->add('userPassword',PasswordType::class, [
                 'label' => 'Ancien mot de passe',
                 'attr' => [
                     'class' => "form-control"
                 ],
                 'mapped' => false,
+
             ])
-            ->add('userPassword', RepeatedType::class, array(
-                'type' => \Symfony\Component\Form\Extension\Core\Type\PasswordType::class,
+            ->add('newPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Nouveau mot de passe'),
                 'second_options' => array('label' => 'Confirmer nouveau mot de passe'),
                 'options' => ['attr' => ['class' => "form-control"]],
                 'required' => true,
+                'mapped' => false,
             ))
             ->add('save', SubmitType::class ,[
                 'label' => 'Changer mot de passe',
@@ -46,8 +49,5 @@ class PasswordType extends AbstractType
             'data_class' => Users::class,
         ]);
     }
-
-}
-{
 
 }
