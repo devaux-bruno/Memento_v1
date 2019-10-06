@@ -44,9 +44,9 @@ class Articles
     private $articleDescription;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="article_text", type="integer", nullable=false)
+     * @ORM\Column(name="article_text", type="text", nullable=false)
      */
     private $articleText;
 
@@ -167,7 +167,7 @@ class Articles
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getArticleText()
     {
@@ -175,7 +175,7 @@ class Articles
     }
 
     /**
-     * @param int $articleText
+     * @param string $articleText
      * @return Articles
      */
     public function setArticleText($articleText)
@@ -223,7 +223,7 @@ class Articles
     /**
      * @return Users
      */
-    public function getArticleUser()
+    public function getArticleUser(): Users
     {
         return $this->articleUser;
     }
@@ -232,7 +232,7 @@ class Articles
      * @param Users $articleUser
      * @return Articles
      */
-    public function setArticleUser($articleUser)
+    public function setArticleUser(Users $articleUser): Articles
     {
         $this->articleUser = $articleUser;
         return $this;
