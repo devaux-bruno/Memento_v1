@@ -52,7 +52,7 @@ class UserEditType extends AbstractType
                 'label' => 'Votre date de naissance :',
                 'empty_data' => '',
                 'widget' => 'choice',
-                'years' => range(1945,2019),
+                'years' => range(1910,2019),
                 // prevents rendering it as type="date", to avoid HTML5 date pickers
                 'html5' => false,
                 // adds a class that can be selected in JavaScript
