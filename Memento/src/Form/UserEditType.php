@@ -77,7 +77,8 @@ class UserEditType extends AbstractType
             ->add('userDescription', TextareaType::class,[
                 'label' => 'Votre description ou commentaire',
                 'attr' => [
-                    'class' => "form-control"
+                    'class' => "form-control",
+                    'name' => "editor1",
                 ],
                 'required'=>false,
             ])
