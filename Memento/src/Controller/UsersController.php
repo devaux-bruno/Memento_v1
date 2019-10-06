@@ -5,7 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Users;
-use App\Form\PasswordType;
+use App\Form\newPasswordType;
 use App\Form\UsersType;
 use App\Form\UserEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -203,21 +203,22 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('home',[]);
         }
 
-        $form = $this->createForm(PasswordType::class, $userId, []);
+        $form = $this->createForm(newPasswordType::class, $userId, []);
         $form->handleRequest($request);
 
         if( $form->isSubmitted() && $form->isValid())
         {
-            $dataold = $form->get('oldPassword')->getData();
-            $datanew = $form->get('userPassword')->getData();
+            $dataold = $form->get('userPassword')->getData();
+            $datanew = $form->get('newPassword')->getData();
+            $checkPassword = $encoder->isPasswordValid($userId, $dataold);
 
-            if($encoder->isPasswordValid($userId, $dataold)){
+            if($checkPassword === true){
 
                 $doctrine = $this->getDoctrine();
                 $entityManager = $doctrine->getManager();
 
-                $new_password = $encoder->encodePassword($userId, $datanew);
-                $userId->setUserPassword($new_password);
+                $newPassword = $encoder->encodePassword($userId, $datanew);
+                $userId->setUserPassword($newPassword);
 
                 $entityManager->persist($userId);
                 $entityManager->flush();
@@ -227,7 +228,7 @@ class UsersController extends AbstractController
                 return $this->redirectToRoute('profil_index',[]);
             }
             else{
-                $this->addFlash('error', 'Désolé vous avez été déconnecter car votre ancien mot de passe n\'était pas correcte');
+                $this->addFlash('error', 'Désolé, votre ancien mot de passe n\'est pas correct');
                 return $this->redirectToRoute('password_edit', ['userId' => $idUser]);
             }
         }
