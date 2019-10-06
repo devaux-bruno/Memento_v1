@@ -20,3 +20,8 @@ body{background-color: linen}
 .spanProfil{font-weight: 600; text-decoration: underline; }
 #profilDesc{line-height: 17px;}
 .pictureProfil {max-height: 300px;}
+
+/*Article*/
+.blockArticle{width: 100%; min-height: 100px; background-color: lightcyan}
+.ArticleNoPic{height: 100px;}
+.ArticleLogo{height: 100px;}

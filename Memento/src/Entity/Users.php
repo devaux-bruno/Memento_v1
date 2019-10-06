@@ -449,7 +449,7 @@ class Users implements UserInterface
      * @param mixed $usersArticles
      * @return Users
      */
-    public function setUsersArticles($usersArticles)
+    public function setUsersArticles( $usersArticles)
     {
         $this->usersArticles = $usersArticles;
         return $this;
