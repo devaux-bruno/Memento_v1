@@ -99,13 +99,17 @@ class UsersController extends AbstractController
     {
 
         $doctrine = $this->getDoctrine();
-        //$user = $this->getUser();
+        $userId = $this->getUser()->getUserId();
 
         $userRepository = $doctrine->getRepository(\App\Entity\Users::class);
         $resultatuser= $userRepository->findAll();
 
+        $articleRepository = $doctrine->getRepository(\App\Entity\Articles::class);
+        $resultatarticle = $articleRepository->findby(['articleUser' => $userId]);
+
         return $this->render('member/profil.html.twig', [
             'resultatuser' => $resultatuser,
+            'resultatarticle' => $resultatarticle,
         ]);
     }
 

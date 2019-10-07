@@ -2,13 +2,13 @@
 
 
 {% block body %}
-<h1 class="text-center mt-5 mb-3">Nos derniers articles</h1>
+<h1 class="text-center mt-5 mb-5">Nos derniers articles</h1>
 <div class="container-fluid">
     <div class="row justify-content-center">
         {% for article in resultatedit %}
-            <a target="_blank" href="">
+            <a class="articleLien" target="_blank" href="#">
                 <div class="blockArticle">
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 imageArticle">
                         {% if article.articlePicture is empty %}
                             <img class="ArticleNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
                         {% else %}
@@ -17,13 +17,13 @@
                     </div>
                     <div class=" col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <div class="row">
-                            <h2>{{ article.articleTitle }}</h2>
+                            <h2 class="mt-3">{{ article.articleTitle |capitalize }}</h2>
                         </div>
                         <div class="row">
-                            {{ article.articleDescription }}
+                            {{ article.articleDescription | raw }}
                         </div>
-                        <div class="row date">
-                            {{ article.articleCreateAt |date('d/m/Y H:m:s') }}
+                        <div class="row dateCreated">
+                            <p class="datePerson">Écrit par {{ article.articleUser.userPseudo }} le {{ article.articleCreateAt |date('d/m/Y H:m:s') }}</p>
                         </div>
                     </div>
                 </div>

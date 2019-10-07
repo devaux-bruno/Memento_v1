@@ -39,6 +39,13 @@ class Articles
     /**
      * @var string
      *
+     * @ORM\Column(name="article_mots_cles", type="text", length=65535, nullable=false)
+     */
+    private $articleMotsCles;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="article_description", type="text", length=65535, nullable=false)
      */
     private $articleDescription;
@@ -223,7 +230,7 @@ class Articles
     /**
      * @return Users
      */
-    public function getArticleUser(): Users
+    public function getArticleUser()
     {
         return $this->articleUser;
     }
@@ -289,6 +296,24 @@ class Articles
     public function setArticlesLikesystem($articlesLikesystem)
     {
         $this->articlesLikesystem = $articlesLikesystem;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleMotsCles()
+    {
+        return $this->articleMotsCles;
+    }
+
+    /**
+     * @param string $articleMotsCles
+     * @return Articles
+     */
+    public function setArticleMotsCles( $articleMotsCles)
+    {
+        $this->articleMotsCles = $articleMotsCles;
         return $this;
     }
 

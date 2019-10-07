@@ -6,6 +6,7 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
         {% endblock %}
     </head>
     <body>
@@ -19,10 +20,10 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarsExample04">
                     <div class="row navbar-nav list-nav ">
                         <div class="col-12 nav-item dropdown inlineFlex">
-                            <a class="dropdown-item" href="{{ path('news_article') }}">Nouveautés</a>
-                            <a class="dropdown-item" href="#">Top Mementos</a>
-                            <a class="dropdown-item" href="#">Actualités</a>
-                            <a class="dropdown-item" href="#">Contact</a>
+                            <a class="titreMenu" href="{{ path('news_article') }}">Nouveautés</a>
+                            <a class="titreMenu" href="#">Top Mementos</a>
+                            <a class="titreMenu" href="#">Actualités</a>
+                            <a class="titreMenu" href="#">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a class="dropdown-item" href="{{ path('lang_index') }}">Gestion languages</a>
                                             <a class="dropdown-item" href="{{ path('user_index') }}">Gestion comptes</a>
-                                            <a class="dropdown-item" href="#">Gestion articles</a>
+                                            <a class="dropdown-item" href="{{ path('article_index') }}">Gestion articles</a>
                                             <a class="dropdown-item" href="#">Gestion commentaires</a>
                                             <a class="dropdown-item" href="#">Statistiques</a>
                                         {% endif %}
@@ -58,7 +59,7 @@
                 </div>
             </nav>
             <div class="row justify-content-center prolongNavbar">
-                <div class="col-12 col-sm-12 col-md-8 center">
+                <div class="col-12 col-sm-12 col-md-8 center menuLangue">
                     <ul class="languagesList">
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
@@ -77,14 +78,14 @@
                     </div>
                 </div>
             {% endfor %}
-            {% for message in app.flashes('error') %}
-                <div class="container">
-                    <div class="alert alert-danger">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
         </header>
+        {% for message in app.flashes('error') %}
+            <div class="container">
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
     {% endblock %}
 
         {% block body %}{% endblock %}

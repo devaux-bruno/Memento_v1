@@ -2,7 +2,7 @@
 
 
 {% block body %}
-    <h1 class="text-center mt-5 mb-3">Créer votre Memento</h1>
+    <h1 class="text-center mt-5 mb-3">Ajouté votre Memento</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
@@ -11,10 +11,12 @@
                     {{ form_errors(formAjoutarticle) }}
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articleTitle) }}</span>
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articlePicture) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.articleUser) }}</span>
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articleMotsCles) }}</span>
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articleDescription) }}</span>
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articleText) }}</span>
                     <span class="text-danger">{{ form_errors(formAjoutarticle.articleLanguage) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.articleValid) }}</span>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -24,6 +26,11 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         {{ form_row(formAjoutarticle.articlePicture) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjoutarticle.articleUser) }}
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -47,11 +54,16 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(formAjoutarticle.articleValid) }}
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
                         {{ form_rest(formAjoutarticle) }}
                         {{ form_row(formAjoutarticle.save) }}
                         {{ form_end(formAjoutarticle) }}
-                        <a class="btn btn-secondary mt-2" href="{{ path('profil_index') }}">Retour</a>
+                        <a class="btn btn-secondary mt-2" href="{{ path('article_index') }}">Retour</a>
                     </div>
                 </div>
             </div>
@@ -64,6 +76,6 @@
     {{ parent() }}
     <script src="//cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'article[articleText]' );
+        CKEDITOR.replace( 'admin_article[articleText]' );
     </script>
 {% endblock %}
