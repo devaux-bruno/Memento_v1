@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des Articles</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('admin_article_add') }}">Ajouter un Article</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Titre <br>Mots clés </th>
+                    <th>Description courte</th>
+                    <th>Statut <br> Date de création</th>
+                    <th>Photo</th>
+                    <th width="250px">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for article in resultatedit %}
+                        <tr>
+                            <td class="middle"><span>{{ article.articleId }}</span></td>
+                            <td class="middle"><span>{{ article.articleTitle }} <br> {{ article.articleMotsCles }}</span></td>
+                            <td class="middle"><span>{{ article.articleDescription }}</span></td>
+                            <td class="middle">
+                                <span>
+                                    {{ article.articleValid }}
+                                <br>
+                                    {{ article.articleMotsCles |date('d/m/Y H:m:s') }}
+                                </span>
+                            </td>
+                            <td class="middle">
+                                <img class="AdminImgArticle" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleId }}">
+                            </td>
+                            <td class="middle">
+                                <a class="btn btn-primary"
+                                   href="{{ path('admin_article_edit', {'articleId' : article.articleId}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('article_admin_delete', {'articleId' : article.articleId}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td colspan="6">
+                            <p>
+                                <a class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse{{ article.articleId }}" aria-expanded="false" aria-controls="collapse{{ article.articleId }}">
+                                    Voir l'article
+                                </a>
+                            </p>
+                            <div class="collapse" id="collapse{{ article.articleId }}">
+                                <div class="adminArticle">
+                                    {{ article.articleText | raw }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}
