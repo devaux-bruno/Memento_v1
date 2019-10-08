@@ -61,12 +61,16 @@ class UsersType extends AbstractType
                 'empty_data' => '',
                 'widget' => 'choice',
                 'years' => range(1945,2019),
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ],
+                'format' => 'dd/MM/yyyy',
                 // prevents rendering it as type="date", to avoid HTML5 date pickers
                 'html5' => false,
                 // adds a class that can be selected in JavaScript
                 //'attr' => ['class' => 'js-datepicker','form-control'],
                 //'data_class' => null,
-                //'required' => false,
+                'required' => true,
             ])
             ->add('userCity',TextType::class, [
                 'label' => 'Votre ville',
