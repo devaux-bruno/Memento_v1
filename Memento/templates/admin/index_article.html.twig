@@ -20,13 +20,13 @@
                     {% for article in resultatedit %}
                         <tr>
                             <td class="middle"><span>{{ article.articleId }}</span></td>
-                            <td class="middle"><span>{{ article.articleTitle }} <br> {{ article.articleMotsCles }}</span></td>
+                            <td class="middle"><span>{{ article.articleTitle }} <br><br> {{ article.articleMotsCles }}</span></td>
                             <td class="middle"><span>{{ article.articleDescription }}</span></td>
                             <td class="middle">
                                 <span>
                                     {{ article.articleValid }}
-                                <br>
-                                    {{ article.articleMotsCles |date('d/m/Y H:m:s') }}
+                                <br><br>
+                                    {{ article.articleCreateAt |date('d/m/Y à H:m:s') }}
                                 </span>
                             </td>
                             <td class="middle">

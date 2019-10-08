@@ -85,6 +85,19 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * @Route("article/{articleId}", name="article")
+     */
+    public function readArticle(Articles $articleId)
+    {
+        $doctrine = $this->getDoctrine();
+
+        $userRepository = $doctrine->getRepository(Articles::class);
+        $resultatArticle= $userRepository->find($articleId);
+
+        return $this->render('home/article.html.twig', ['resultatArticle' => $resultatArticle]);
+    }
+
+    /**
      * @Route("admin/addArticle", name="admin_article_add")
      */
     public function adminAddArticle(Request $request)
@@ -158,6 +171,8 @@ class ArticlesController extends AbstractController
                     $file = $form->get('articlePicture')->getData();
                     if( !empty($file) )
                     {
+                        $this->addFlash('error', 'je suis la!');
+
                         //suppression de l'ancienne photo
                         $fichierSupp = $this->getParameter('article_pictures_directory');
                         unlink($fichierSupp . $articlePicture);
@@ -177,6 +192,9 @@ class ArticlesController extends AbstractController
                             return $this->redirectToRoute('admin_article_edit', []);
                         }
                     }
+                    else{
+                        $fileName= $articlePicture;
+                    }
                 }
                 else{
                     $file = $form->get('articlePicture')->getData();
@@ -194,10 +212,13 @@ class ArticlesController extends AbstractController
                             return $this->redirectToRoute('admin_article_edit', []);
                         }
                     }
+                    else{
+                        $fileName= $articlePicture;
+                    }
                 }
             }
             else{
-                $fileName='';
+                $fileName= $articlePicture;
             }
 
             $articleId->setArticlePicture($fileName);
@@ -212,7 +233,7 @@ class ArticlesController extends AbstractController
 
             $this->addFlash('success', 'l\'article a bien été enregistré!');
 
-            return $this->redirectToRoute('profil_index',[]);
+            return $this->redirectToRoute('article_index',[]);
 
         }
         return $this->render('admin/article_admin_add.html.twig',[
@@ -237,7 +258,7 @@ class ArticlesController extends AbstractController
         if( !empty($articlePicture))
         {
             //suppression de l'ancienne photo
-            $fichierSupp = $this->getParameter('profil_pictures_directory');
+            $fichierSupp = $this->getParameter('article_pictures_directory');
             unlink($fichierSupp . $articlePicture);
             $fs = new Filesystem();
             $fs->remove($fichierSupp.$articleId->getArticlePicture());
@@ -251,6 +272,44 @@ class ArticlesController extends AbstractController
         return $this->redirectToRoute('article_index',[]);
     }
 
+    /**
+     * @Route("member/article-delete/{articleId}", name="member_article_delete")
+     */
+    public function deleteMemberArticle(Articles $articleId)
+    {
+        $idUser = $this->getUser()->getUserId();
+        $numIdUser = $articleId->getArticleUser()->getUserId();
+
+        if($idUser != $numIdUser ) {
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer que vos articles');
+            return $this->redirectToRoute('home',[]);
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $article = $entityManager->getRepository(Articles::class)->find($articleId);
+
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'Il n \'y a pas de d\'article avec l\'ID n°'.$article.'!'
+            );
+        }
+        $articlePicture = $entityManager->getRepository(Articles::class)->find($articleId)->getArticlePicture();
+        if( !empty($articlePicture))
+        {
+            //suppression de l'ancienne photo
+            $fichierSupp = $this->getParameter('article_pictures_directory');
+            unlink($fichierSupp . $articlePicture);
+            $fs = new Filesystem();
+            $fs->remove($fichierSupp.$articleId->getArticlePicture());
+        }
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'L\'article a bien été supprimé!');
+
+        return $this->redirectToRoute('profil_index',[]);
+    }
 
     /**
      * @Route("member/Article-edit/{articleId}", name="member_article_edit")
@@ -258,11 +317,19 @@ class ArticlesController extends AbstractController
     public function memberArticleEdit(Request $request, Articles $articleId)
     {
 
+        $idUser = $this->getUser()->getUserId();
+        $numIdUser = $articleId->getArticleUser()->getUserId();
+
+        if($idUser != $numIdUser ) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier que vos articles');
+            return $this->redirectToRoute('home',[]);
+        }
+
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
         $articlePicture = $entityManager->getRepository(Articles::class)->find($articleId)->getArticlePicture();
 
-        $form = $this->createForm(AdminArticleType::Class, $articleId, []);
+        $form = $this->createForm(ArticleType::Class, $articleId, []);
         $form->handleRequest($request);
 
         if( $form->isSubmitted() && !$form->isEmpty() && $form->isValid())
@@ -293,6 +360,9 @@ class ArticlesController extends AbstractController
                             return $this->redirectToRoute('admin_article_edit', []);
                         }
                     }
+                    else{
+                        $fileName= $articlePicture;
+                    }
                 }
                 else{
                     $file = $form->get('articlePicture')->getData();
@@ -310,14 +380,18 @@ class ArticlesController extends AbstractController
                             return $this->redirectToRoute('admin_article_edit', []);
                         }
                     }
+                    else{
+                        $fileName= $articlePicture;
+                    }
                 }
             }
             else{
-                $fileName='';
+                $fileName= $articlePicture;
             }
 
             $articleId->setArticlePicture($fileName);
             $articleId->setArticleCreateAt(new \DateTime()) ;
+            $articleId->setArticleValid('waiting_validation');
 
 
             $doctrine = $this->getDoctrine();
@@ -326,12 +400,12 @@ class ArticlesController extends AbstractController
             $entityManager->persist($articleId);
             $entityManager->flush();
 
-            $this->addFlash('success', 'l\'article a bien été enregistré!');
+            $this->addFlash('success', 'L\'article a bien été modifié!');
 
             return $this->redirectToRoute('profil_index',[]);
 
         }
-        return $this->render('admin/article_admin_add.html.twig',[
+        return $this->render('member/article_edit.html.twig',[
             'formAjoutarticle' => $form->createView(),
         ]);
     }

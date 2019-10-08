@@ -23,30 +23,35 @@ class UserEditType extends AbstractType
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>true,
             ])
             ->add('userEmail', EmailType::class, [
                 'label' => 'Adresse mail : ',
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>true,
             ])
             ->add('userFirstname',TextType::class, [
                 'label' => 'Prénom',
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>false,
             ])
             ->add('userLastname',TextType::class, [
                 'label' => 'Nom de famille',
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>false,
             ])
             ->add('userJob',TextType::class, [
                 'label' => 'Profession',
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>false,
             ])
             ->add('userBirthday', BirthdayType::class, [
                 'label' => 'Votre date de naissance :',
@@ -55,16 +60,21 @@ class UserEditType extends AbstractType
                 'years' => range(1910,2019),
                 // prevents rendering it as type="date", to avoid HTML5 date pickers
                 'html5' => false,
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ],
+                'format' => 'dd/MM/yyyy',
                 // adds a class that can be selected in JavaScript
                 //'attr' => ['class' => 'js-datepicker','form-control'],
                 //'data_class' => null,
-                //'required' => false,
+                'required' => true,
             ])
             ->add('userCity',TextType::class, [
                 'label' => 'Votre ville',
                 'attr' => [
                     'class' => "form-control"
                 ],
+                'required'=>false,
             ])
             ->add('userPicture', FileType::class, [
                 'label' => 'Votre Photo de profil :',

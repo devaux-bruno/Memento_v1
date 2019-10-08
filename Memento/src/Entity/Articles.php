@@ -239,7 +239,7 @@ class Articles
      * @param Users $articleUser
      * @return Articles
      */
-    public function setArticleUser(Users $articleUser): Articles
+    public function setArticleUser(Users $articleUser): Users
     {
         $this->articleUser = $articleUser;
         return $this;

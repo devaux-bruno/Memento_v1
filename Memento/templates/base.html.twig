@@ -14,7 +14,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-light navcolor">
                 <a class="navbar-brand" href="{{ path('home') }}"><img class="navbarLogo" src="{{ asset('asset/img/logo-memento.png') }}" alt="logo"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="btnMenu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarsExample04">
@@ -59,12 +59,12 @@
                 </div>
             </nav>
             <div class="row justify-content-center prolongNavbar">
-                <div class="col-12 col-sm-12 col-md-8 center menuLangue">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 center menuLangue">
                     <ul class="languagesList">
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 search">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 search">
                     <form class="form-inline mt-2 mt-md-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="Rechercher ..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img class="btnSearch" src="{{ asset('asset/img/search-solid.svg') }}" alt="Search"></button>
