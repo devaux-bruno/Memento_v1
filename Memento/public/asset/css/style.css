@@ -1,12 +1,12 @@
 /*Général*/
-body{background: linear-gradient(30deg, #73d632,#3173d6); height: 100%;font-family: 'open sans', sans-serif;}
-header{border-bottom: 5px solid #000; border-radius: 20px;}
+body{height: 100%;background-color: #dbe4eb;font-family: 'open sans', sans-serif;}
+header{background: linear-gradient(30deg, #dbe4eb,#929292);border-bottom: 1px solid #000; border-radius: 20px;}
 .center{text-align: center}
 h1,h2,h3,h4,h5{font-family: 'Yeseva One', cursive;}
+footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid #000; border-radius: 20px;}
 
 
 /*Navbar*/
-.navcolor{background-color: #73d632;}
 .userNoPic{ height: 50px;}
 .menuPicture{left: -110px}
 .navbarLogo{height: 80px;}
@@ -15,12 +15,14 @@ h1,h2,h3,h4,h5{font-family: 'Yeseva One', cursive;}
 .languagesList{list-style: none; display: inline-flex;}
 .logoLanguages{max-height: 50px;margin-left: 10px;margin-right: 10px;}
 .logoLanguages:hover{max-height: 60px;}
-.prolongNavbar{background-color: #73d632;margin-right: 0px !important; padding-top: 10px;}
+.prolongNavbar{margin-right: 0px !important; padding-top: 10px;}
 .search{text-align: end; display: flex;}
 .userLogo{ height: 70px; border-radius: 35px; -moz-border-radius: 35px; -webkit-border-radius: 35px;}
 .titreMenu{padding: .25rem 1.5rem; color: #000000; font-size: 20px;font-family: 'Yeseva One', cursive;}
 .titreMenu:hover{text-decoration: none; color: #000000; font-size: 28px}
 .menuLangue{height: 70px;}
+.btn-outline-success {color: #646363; border-color: #646363;}
+.btn-outline-success:hover {background-color: #646363;border-color: #646363; }
 
 /*Pade de Profil*/
 .spanProfil{font-weight: 600; text-decoration: underline; }
@@ -28,25 +30,37 @@ h1,h2,h3,h4,h5{font-family: 'Yeseva One', cursive;}
 .pictureProfil {max-height: 300px;}
 
 /*Article*/
-.blockArticle{min-height: 200px; background-color: black;  display: flex; margin-bottom: 20px; border-radius: 40px;border: 1px solid #73d632; box-shadow: 5px 5px #73d632;}
-.blockArticle:hover{border: 1px solid #3173d6;box-shadow: 5px 5px #3173d6; margin-top:5px; padding-left: 5px; text-decoration: none}
+.blockArticle{min-height: 200px;background-color: #293133; display: flex; margin-bottom: 20px; border-radius: 40px;border: 1px solid #000000; box-shadow: 5px 5px #000000;}
+.blockArticle:hover{border: 1px solid #000000;box-shadow: 1px 1px #000000; text-decoration: none; position: relative; top: 5px; left: 5px;}
 .ArticleNoPic{height: 200px;}
 .ArticleLogo{height: 200px;}
 .imageArticle{text-align: center; padding-top: 10px; padding-bottom: 10px;}
 .dateCreated{text-align: right; display: inline; vertical-align: bottom;}
-.articleLien{color:#73d632;width: 90%;}
-.articleLien:hover{color:#3173d6;text-decoration: none}
-.descArticle{padding-left: 15px; padding-right: 15px;}
+.articleLien{color:#FFFFFF;width: 90%;}
+.articleLien:hover{color:#FFFFFF;text-decoration: none}
+.descArticle{padding-left: 15px; padding-right: 70px;}
 .AdminImgArticle{height: 100px;}
 .pictureProfilArticle{height: 100px}
-.articleDetails{width: 90%}
+.articleDetails{border: 1px solid #293133; width: 100%; padding: 20px; background-color: #FFFFFF;  border-radius: 50px;}
+
 
 /*table admin*/
 .middle{vertical-align: middle !important; }
-.adminArticle{text-align: left;background-color: lightgreen; border: 2px solid #dee2e6; border-radius: 20px;padding: 20px; width:94vw;}
+.adminArticle{text-align: left;background-color: #FFFFFF;border: 1px solid #293133; border-radius: 20px;padding: 20px; width:94vw;}
+
+.table td, table th{ border-top: 1px solid #293133;}
 
 
-
+/*Footer*/
+.resauxSociaux{display: block; text-align: center}
+.contact{text-align: center}
+.bold{font-weight: bold}
+.logoSociaux{height: 40px;}
+.footerList{list-style: none; text-align: center;}
+.titreFooter{color: #000000}
+.titreFooter:hover{color: #000000}
+.gridCenter{display: grid; text-align: center}
+.footer{ width: 100%}
 
 /************************************************************************************************************
 *************************************************************************************************************
@@ -68,6 +82,7 @@ h1,h2,h3,h4,h5{font-family: 'Yeseva One', cursive;}
     .inlineFlex {display: inline-grid; justify-content: center;}
     #btnMenu{z-index: 999; position: absolute; left: 45vw; top: 28px;}
     .navbar-collapse{ flex-basis: 90%!important;}
+    .descArticle{ padding-right: 15px;}
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
