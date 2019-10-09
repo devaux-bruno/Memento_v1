@@ -30,8 +30,8 @@ footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid
 .pictureProfil {max-height: 300px;}
 
 /*Article*/
-.blockArticle{min-height: 200px;background-color: #293133; display: flex; margin-bottom: 20px; border-radius: 40px;border: 1px solid #000000; box-shadow: 5px 5px #000000;}
-.blockArticle:hover{border: 1px solid #000000;box-shadow: 1px 1px #000000; text-decoration: none; position: relative; top: 5px; left: 5px;}
+.blockArticle{min-height: 200px;background-color: #293133; display: flex; margin-bottom: 20px; border-radius: 40px;border: 1px solid #FFFFFF; box-shadow: 5px 5px #FFFFFF;}
+.blockArticle:hover{border: 1px solid #FFFFFF;box-shadow: 1px 1px #FFFFFF; text-decoration: none; position: relative; top: 5px; left: 5px;}
 .ArticleNoPic{height: 200px;}
 .ArticleLogo{height: 200px;}
 .imageArticle{text-align: center; padding-top: 10px; padding-bottom: 10px;}
@@ -47,8 +47,14 @@ footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid
 /*table admin*/
 .middle{vertical-align: middle !important; }
 .adminArticle{text-align: left;background-color: #FFFFFF;border: 1px solid #293133; border-radius: 20px;padding: 20px; width:94vw;}
+table tr, table th{ border-bottom: 1px solid #293133;}
+.articleLienAdmin{color: black; text-decoration: underline}
+.bkgreen{background-color: #718C00}
+.bkorange{background-color: #F5871F}
+.bkred{background-color: red}
 
-.table td, table th{ border-top: 1px solid #293133;}
+/*Comments*/
+.pictureProfilComment{height: 40px}
 
 
 /*Footer*/
@@ -60,7 +66,7 @@ footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid
 .titreFooter{color: #000000}
 .titreFooter:hover{color: #000000}
 .gridCenter{display: grid; text-align: center}
-.footer{ width: 100%}
+.footer{width: 100%;}
 
 /************************************************************************************************************
 *************************************************************************************************************

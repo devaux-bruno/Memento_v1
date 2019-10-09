@@ -18,9 +18,19 @@
                 </tr>
                 <div id="accordion">
                     {% for article in resultatedit %}
-                        <tr>
-                            <td class="middle"><span>{{ article.articleId }}</span></td>
-                            <td class="middle"><span>{{ article.articleTitle }} <br><br> {{ article.articleMotsCles }}</span></td>
+                        {% if article.articleValid is same as ('published') %}
+                            <tr class="bkgreen">
+                        {% elseif article.articleValid is same as ('waiting-validation') %}
+                            <tr class="bkorange">
+                        {% else %}
+                            <tr class="bkred">
+                        {% endif %}
+                            <td class="middle">
+                                <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : article.articleId}) }}">
+                                    <span>{{ article.articleId }}</span>
+                                </a>
+                            </td>
+                            <td class="middle"><span>{{ article.articleTitle | capitalize }} <br><br> {{ article.articleMotsCles }}</span></td>
                             <td class="middle"><span>{{ article.articleDescription }}</span></td>
                             <td class="middle">
                                 <span>
@@ -30,7 +40,9 @@
                                 </span>
                             </td>
                             <td class="middle">
-                                <img class="AdminImgArticle" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleId }}">
+                                <a class="articleLien" target="_blank" href="{{ path('article', {'articleId' : article.articleId}) }}">
+                                    <img class="AdminImgArticle" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleId }}">
+                                </a>
                             </td>
                             <td class="middle">
                                 <a class="btn btn-primary"
@@ -43,7 +55,13 @@
                                 </a>
                             </td>
                         </tr>
-                    <tr>
+                        {% if article.articleValid is same as ('published') %}
+                            <tr class="bkgreen">
+                        {% elseif article.articleValid is same as ('waiting-validation') %}
+                            <tr class="bkorange">
+                        {% else %}
+                            <tr class="bkred">
+                        {% endif %}
                         <td colspan="6">
                             <p>
                                 <a class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse{{ article.articleId }}" aria-expanded="false" aria-controls="collapse{{ article.articleId }}">

@@ -93,11 +93,55 @@
             <div class="tab-pane fade mb-5 " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="row text-center">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    2
+                        {% if resultatComments is empty  %}
+                            <p class="mt-3 mb-3">Vous n'avez pas fait de commentaire pour l'instant!</p>
+                        {% endif %}
+                        <div class="table-responsive-sm">
+                            <table class="table my-5">
+                                <tr>
+                                    <th>Numéro d'article</th>
+                                    <th>Commentaire</th>
+                                    <th>Statut <br> Date de création</th>
+                                    <th width="250px">Action</th>
+                                </tr>
+                                {% for comments in resultatComments %}
+                                    {% if comments.commentStatus is same as ('published') %}
+                                    <tr class="bkgreen">
+                                        {% elseif comments.commentStatus is same as ('signaled') %}
+                                    <tr class="bkorange">
+                                        {% else %}
+                                    <tr class="bkred">
+                                        {% endif %}
+                                        <td class="middle">
+                                            <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : comments.commentArticle.articleId}) }}">
+                                                <span>{{ comments.commentArticle.articleTitle }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="middle"><span>{{ comments.commentText }}</span></td>
+                                        <td class="middle">
+                                            <span>
+                                                {{ comments.commentStatus }}
+                                                <br><br>
+                                                {{ comments.commentCreatedAt |date('d/m/Y à H:m:s') }}
+                                            </span>
+                                        </td>
+                                        <td class="middle">
+                                            <a class="btn btn-warning"
+                                               href="{{ path('member_comment_edit', {'commentId' : comments.commentId }) }}">
+                                                Modifier
+                                            </a>
+                                            <a class="btn btn-danger"
+                                               href="{{ path('member_comment_delete', {'commentId' : comments.commentId }) }}">
+                                                Supprimer
+                                            </a>
+                                        </td>
+                                    </tr>
+                            </table>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

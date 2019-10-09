@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="row justify-content-center mt-5 mb-5">
+        <h1 class="text-center mt-5 mb-3">Ajouté votre Commentaire</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+            {{ form_start(formAjoutcomment) }}
+            <div class="my-custom-class-for-errors alert-danger">
+                {{ form_errors(formAjoutcomment) }}
+                <span class="text-danger">{{ form_errors(formAjoutcomment.commentArticle) }}</span>
+                <span class="text-danger">{{ form_errors(formAjoutcomment.commentUser) }}</span>
+                <span class="text-danger">{{ form_errors(formAjoutcomment.commentStatus) }}</span>
+                <span class="text-danger">{{ form_errors(formAjoutcomment.commentText) }}</span>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    {{ form_row(formAjoutcomment.commentArticle) }}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    {{ form_row(formAjoutcomment.commentUser) }}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    {{ form_row(formAjoutcomment.commentStatus) }}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    {{ form_row(formAjoutcomment.commentText) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                    {{ form_rest(formAjoutcomment) }}
+                    {{ form_row(formAjoutcomment.save) }}
+                    {{ form_end(formAjoutcomment) }}
+                    <a class="btn btn-secondary mt-2" href="{{ path('comments_index') }}">Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
