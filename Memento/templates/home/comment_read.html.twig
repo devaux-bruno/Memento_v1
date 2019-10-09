@@ -1,0 +1,28 @@
+{% if resultatComment is empty  %}
+<div class="row justify-content-center">
+    <p>Il n'y a pas de commentaire pour le moment sur cet article!</p>
+</div>
+{% else %}
+    {% for comment in resultatComment %}
+        <div class="row justify-content-center">
+            <div class="resultatComment">
+                <div class="row mb-3">
+                    <div class="articleUser">
+                        {% if comment.commentUser.userPicture is empty %}
+                            <img class="pictureProfilComment" src="{{ asset('asset/img/user_nopic.png') }}" alt="nopic">
+                        {% else %}
+                            <img class="pictureProfilComment" src="{{ asset('asset/img/profil/') }}{{  comment.commentUser.userPicture }}" alt="profil picture">
+                        {% endif %}
+                        <span>Par {{ comment.commentUser.userPseudo }}</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <p>{{  comment.commentText }}</p>
+                </div>
+                <div class="row mb-3">
+                    <span class="dateComment">le {{ comment.commentCreatedAt |date('d/m/Y à H:m:s') }}</span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

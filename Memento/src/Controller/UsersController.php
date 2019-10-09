@@ -107,9 +107,13 @@ class UsersController extends AbstractController
         $articleRepository = $doctrine->getRepository(\App\Entity\Articles::class);
         $resultatarticle = $articleRepository->findby(['articleUser' => $userId]);
 
+        $commentsRepository = $doctrine->getRepository(\App\Entity\Comments::class);
+        $resultatComments = $commentsRepository->findby(['commentUser' => $userId]);
+
         return $this->render('member/profil.html.twig', [
             'resultatuser' => $resultatuser,
             'resultatarticle' => $resultatarticle,
+            'resultatComments' => $resultatComments,
         ]);
     }
 

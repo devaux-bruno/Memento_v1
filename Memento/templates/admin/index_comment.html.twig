@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center mt-5 mb-3">Gestion des Commentaires</h1>
+<div class="container-fluid text-center">
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('admin_comment_add') }}">Ajouter un Commentaire</a>
+    </div>
+    <div class="table-responsive-sm">
+        <table class="table my-5">
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Article commenté</th>
+                <th>Commentaire</th>
+                <th>Statut <br> Date de création</th>
+                <th width="250px">Action</th>
+            </tr>
+            {% for comments in resultatcomment %}
+                {% if comments.commentStatus is same as ('published') %}
+                    <tr class="bkgreen">
+                {% elseif comments.commentStatus is same as ('signaled') %}
+                    <tr class="bkorange">
+                {% else %}
+                    <tr class="bkred">
+                {% endif %}
+                    <td class="middle">
+                        <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : comments.commentArticle.articleId}) }}">
+                            <span>{{ comments.commentId }}</span>
+                        </a>
+                    </td>
+                    <td class="middle"><span>{{ comments.commentUser.userPSeudo }}</span></td>
+                    <td class="middle">
+                        <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : comments.commentArticle.articleId}) }}">
+                            <span>{{ comments.commentArticle.articleTitle }}</span>
+                        </a>
+                    </td>
+                    <td class="middle"><span>{{ comments.commentText }}</span></td>
+                    <td class="middle">
+                        <span>
+                            {{ comments.commentStatus }}
+                            <br><br>
+                            {{ comments.commentCreatedAt |date('d/m/Y à H:m:s') }}
+                        </span>
+                    </td>
+                    <td class="middle">
+                        <a class="btn btn-danger"
+                           href="{{ path('admin_comment_delete', {'commentId' : comments.commentId }) }}">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

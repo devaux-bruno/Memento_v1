@@ -5,8 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\Articles;
+use App\Entity\Comments;
 use App\Form\AdminArticleType;
 use App\Form\ArticleType;
+use App\Form\CommentsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -94,7 +96,40 @@ class ArticlesController extends AbstractController
         $userRepository = $doctrine->getRepository(Articles::class);
         $resultatArticle= $userRepository->find($articleId);
 
-        return $this->render('home/article.html.twig', ['resultatArticle' => $resultatArticle]);
+        $userComment = new Comments();
+        $commentUser = $this->getUser();
+        $request = $this->get('request_stack')->getMasterRequest();
+
+        $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
+
+        $form = $this->createForm(CommentsType::class, $userComment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && !$form->isEmpty() && $form->isValid()) {
+
+            $userComment->setCommentCreatedAt(new \DateTime()) ;
+            $userComment->setCommentUser($commentUser);
+            $userComment->setCommentArticle($articleId);
+            $userComment->setCommentStatus('published');
+
+
+            $entityManager->persist($userComment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le commentaire a bien été ajouté!');
+
+            return $this->redirectToRoute('article',
+                ['articleId' => $articleId->getArticleId()]
+            );
+
+        }
+
+
+        return $this->render('home/article.html.twig', [
+            'resultatArticle' => $resultatArticle,
+            'formAjoutcomment' => $form->createView(),
+            ]);
     }
 
     /**

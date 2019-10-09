@@ -27,10 +27,52 @@
                 <span>Par {{ resultatArticle.articleUser.userPseudo }} le {{ resultatArticle.articleCreateAt |date('d/m/Y à H:m:s') }}</span>
             </div>
         </div>
-        <div class="row mt-3 mb-3">
-            <div class="articleDetails">
-                <p>{{ resultatArticle.articleText | raw }}</p>
+        {%  if resultatArticle.articleValid is same as ('published') %}
+            <div class="row mt-3 mb-3">
+                <div class="articleDetails">
+                    <p>{{ resultatArticle.articleText | raw }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p class="mt-5 mb-5">Désolé, votre article n'a pas encore été validé pour une publication!</p>
+        {% endif %}
+        {% if app.user %}
+        <div class="row justify-content-center mb-3">
+            <span class="titrecommentaire">Ajouter un Commentaires</span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formAjoutcomment) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAjoutcomment) }}
+                    <span class="text-danger">{{ form_errors(formAjoutcomment.commentText) }}</span>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjoutcomment.commentText) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_row(formAjoutcomment.save) }}
+                        {{ form_end(formAjoutcomment) }}
+                    </div>
+                </div>
             </div>
         </div>
+        {% else %}
+            <div class="row justify-content-center mt-3 mb-5">
+                <span class="titrecommentaire">Vous voulez rajouter un commentaire?
+                    <br>
+                    <a href="{{ path('user_add') }}">Inscrivez-vous</a> ou <a href="{{ path('app_login') }}">Connecter vous</a> !
+                </span>
+            </div>
+        {% endif %}
+        <div class="row justify-content-center mb-3">
+            <p class="titreCommentaire">Commentaires</p>
+        </div>
+        {{ render(controller('App\\Controller\\CommentsController::readComment',{'articleId': resultatArticle.articleId})) }}
+
     </div>
+
 {% endblock %}
