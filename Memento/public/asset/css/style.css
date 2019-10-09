@@ -54,8 +54,11 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 .bkred{background-color: red}
 
 /*Comments*/
-.pictureProfilComment{height: 40px}
-
+.pictureProfilComment{height: 60px;border-radius: 30px; top: 10px; position: relative; left: 10px;}
+.resultatComment{width : 60%; background-color: #FFFFFF; border-radius: 20px; border: 1px solid #293133;margin-bottom: 15px; padding-left: 20px; padding-right: 20px;}
+.dateComment{text-align: right; display: block;padding-right: 15px;}
+.textComment{padding-left: 75px; padding-right: 15px}
+.pseudoComment{position: relative; top: 15px; left: 15px;}
 
 /*Footer*/
 .resauxSociaux{display: block; text-align: center}

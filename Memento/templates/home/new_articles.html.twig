@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         {% for article in resultatedit %}
             {%  if article.articleValid is same as ('published') %}
-                <a class="articleLien" target="_blank" href="{{ path('article', {'articleId' : article.articleId}) }}">
+                <a class="articleLien"  href="{{ path('article', {'articleId' : article.articleId}) }}">
                     <div class="blockArticle">
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 imageArticle">
                             {% if article.articlePicture is empty %}
