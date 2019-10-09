@@ -13,14 +13,14 @@
                         {% else %}
                             <img class="pictureProfilComment" src="{{ asset('asset/img/profil/') }}{{  comment.commentUser.userPicture }}" alt="profil picture">
                         {% endif %}
-                        <span>Par {{ comment.commentUser.userPseudo }}</span>
+                        <span class="pseudoComment">Par {{ comment.commentUser.userPseudo }}</span>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <p>{{  comment.commentText }}</p>
+                    <p class="textComment">{{  comment.commentText }}</p>
                 </div>
-                <div class="row mb-3">
-                    <span class="dateComment">le {{ comment.commentCreatedAt |date('d/m/Y à H:m:s') }}</span>
+                <div class="row mb-3 dateComment">
+                    <span class="datecomment">le {{ comment.commentCreatedAt |date('d/m/Y à H:m:s') }}</span>
                 </div>
             </div>
         </div>

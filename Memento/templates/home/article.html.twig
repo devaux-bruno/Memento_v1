@@ -4,7 +4,7 @@
     <h1 class="text-center mt-5 mb-5">{{ resultatArticle.articleTitle | capitalize}}</h1>
     <div class="container">
         <div class="row justify-content-center mb-3">
-            {% if app.user.userId  is same as (resultatArticle.articleUser.userId) %}
+            {% if app.user is same as (resultatArticle.articleUser) %}
                 <div class="row justify-content-center">
                     <a class="btn btn-primary"
                        href="{{ path('member_article_edit', {'articleId' : resultatArticle.articleId}) }}">
