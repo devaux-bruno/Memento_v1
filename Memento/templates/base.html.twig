@@ -71,69 +71,76 @@
                     </form>
                 </div>
             </div>
-            {% for message in app.flashes('success') %}
-                <div class="container">
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
         </header>
-        {% for message in app.flashes('error') %}
+
+        <div id="messageSuccess">
+            <div class="container">
+                <div class="alert alert-success">
+                {% for message in app.flashes('success') %}
+                    <p class="textSucces">{{ message }}</p>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="messageError">
             <div class="container">
                 <div class="alert alert-danger">
-                    {{ message }}
+                {% for message in app.flashes('error') %}
+                    <p class="textError">{{ message }}</p>
+                {% endfor %}
                 </div>
             </div>
-        {% endfor %}
-    {% endblock %}
+        </div>
 
+        {% endblock %}
+        <div id="body" class="mt-5 mb-5">
         {% block body %}{% endblock %}
-
-    {% block footer %}
-        <footer class="mt-5">
-            <div class="row justify-content-center mt-3 footer">
-                <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
-                    <p class="contact">
-                        <span class="bold">Me contacter</span>
-                    <br>
-                        <span class="bold">Tel:</span> 06 34 70 09 02
-                    <br>
-                        <span class="bold">Mail:</span> contact@devaux-bruno.com</p>
-                    <div class="resauxSociaux">
-                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Github" src="{{ asset('asset/img/github-brands.svg') }}"></a>
-                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Tweeter" src="{{ asset('asset/img/instagram-brands.svg') }}"></a>
-                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Facebook" src="{{ asset('asset/img/facebook-square-brands.svg') }}"></a>
-                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Instagram" src="{{ asset('asset/img/twitter-square-brands.svg') }}"></a>
+        </div>
+        {% block footer %}
+            <footer class="mt-5">
+                <div class="row justify-content-center mt-3 footer">
+                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                        <p class="contact">
+                            <span class="bold">Me contacter</span>
+                        <br>
+                            <span class="bold">Tel:</span> 06 34 70 09 02
+                        <br>
+                            <span class="bold">Mail:</span> contact@devaux-bruno.com</p>
+                        <div class="resauxSociaux">
+                            <a target="_blank" href="#"><img class="logoSociaux" alt="logo Github" src="{{ asset('asset/img/github-brands.svg') }}"></a>
+                            <a target="_blank" href="#"><img class="logoSociaux" alt="logo Tweeter" src="{{ asset('asset/img/instagram-brands.svg') }}"></a>
+                            <a target="_blank" href="#"><img class="logoSociaux" alt="logo Facebook" src="{{ asset('asset/img/facebook-square-brands.svg') }}"></a>
+                            <a target="_blank" href="#"><img class="logoSociaux" alt="logo Instagram" src="{{ asset('asset/img/twitter-square-brands.svg') }}"></a>
+                        </div>
+                    </div>
+                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                        <div class="gridCenter">
+                            <a class="titreFooter" href="{{ path('news_article') }}">Nouveautés</a>
+                            <a class="titreFooter" href="#">Top Mementos</a>
+                            <a class="titreFooter" href="#">Actualités</a>
+                            <a class="titreFooter" href="#">Contact</a>
+                        </div>
+                    </div>
+                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                        <div class="gridCenter">
+                            <a class="titreFooter" href="#">Mentions légales</a>
+                            <a class="titreFooter" href="#">Politique de confidentialité</a>
+                            <a class="titreFooter" href="#">CGU</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
-                    <div class="gridCenter">
-                        <a class="titreFooter" href="{{ path('news_article') }}">Nouveautés</a>
-                        <a class="titreFooter" href="#">Top Mementos</a>
-                        <a class="titreFooter" href="#">Actualités</a>
-                        <a class="titreFooter" href="#">Contact</a>
-                    </div>
+                <div class="row justify-content-center footer">
+                    <ul class="languagesList">
+                        {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
+                    </ul>
                 </div>
-                <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
-                    <div class="gridCenter">
-                        <a class="titreFooter" href="#">Mentions légales</a>
-                        <a class="titreFooter" href="#">Politique de confidentialité</a>
-                        <a class="titreFooter" href="#">CGU</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center footer">
-                <ul class="languagesList">
-                    {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
-                </ul>
-            </div>
-        </footer>
-    {% endblock %}
+            </footer>
+        {% endblock %}
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="{{ asset('asset/js/memento_js.js') }}"></script>
         {% endblock %}
     </body>
 </html>

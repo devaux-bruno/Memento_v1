@@ -44,6 +44,10 @@
                         </span>
                     </td>
                     <td class="middle">
+                        <a class="btn btn-primary"
+                           href="{{ path('comments_status', {'commentId' : comments.commentId }) }}">
+                            Status
+                        </a>
                         <a class="btn btn-danger"
                            href="{{ path('admin_comment_delete', {'commentId' : comments.commentId }) }}">
                             Supprimer

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * Comments
  *
  * @ORM\Table(name="comments", indexes={@ORM\Index(name="comment_user_id", columns={"comment_user_id"}), @ORM\Index(name="comment_user_article", columns={"comment_article_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CommentsRepository")
  */
 class Comments
 {

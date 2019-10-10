@@ -1,10 +1,10 @@
 /*Général*/
-body{height: 100%;background-color: #dbe4eb;font-family: 'open sans', sans-serif;}
+body{height: 100vh;background-color: #dbe4eb;font-family: 'open sans', sans-serif;}
 header{background: linear-gradient(30deg, #dbe4eb,#929292);border-bottom: 1px solid #000; border-radius: 20px;}
 .center{text-align: center}
 h1,h2,h3,h4,h5{font-family: 'Yeseva One', cursive;}
 footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid #000; border-radius: 20px;}
-
+#body{min-height : calc(100vh - 429.6px - 6rem)}
 
 /*Navbar*/
 .userNoPic{ height: 50px;}
@@ -42,7 +42,11 @@ footer{background: linear-gradient(30deg, #dbe4eb,#929292);border-top: 1px solid
 .AdminImgArticle{height: 100px;}
 .pictureProfilArticle{height: 100px}
 .articleDetails{border: 1px solid #293133; width: 100%; padding: 20px; background-color: #FFFFFF;  border-radius: 50px;}
-
+.voteNo{ height: 50px; display: flex; color: #000000; transform: rotate(180deg)}
+.voteYes{ height: 50px; display: flex; color: #000000}
+.voteNo:hover{ color: red}
+.voteYes:hover{ color: green}
+.titreLike{ text-align: right;top: 25px; position: relative;}
 
 /*table admin*/
 .middle{vertical-align: middle !important; }
@@ -56,9 +60,11 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 /*Comments*/
 .pictureProfilComment{height: 60px;border-radius: 30px; top: 10px; position: relative; left: 10px;}
 .resultatComment{width : 60%; background-color: #FFFFFF; border-radius: 20px; border: 1px solid #293133;margin-bottom: 15px; padding-left: 20px; padding-right: 20px;}
-.dateComment{text-align: right; display: block;padding-right: 15px;}
 .textComment{padding-left: 75px; padding-right: 15px}
 .pseudoComment{position: relative; top: 15px; left: 15px;}
+.signaledcomment{text-align: left; display: block; color: red;left: 20px; position: relative;}
+.signaledcomment:hover{color: tomato; text-decoration: none}
+.datecomment{text-align: end;}
 
 /*Footer*/
 .resauxSociaux{display: block; text-align: center}
@@ -70,6 +76,11 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 .titreFooter:hover{color: #000000}
 .gridCenter{display: grid; text-align: center}
 .footer{width: 100%;}
+
+/*Popup message*/
+#messageSuccess{position: fixed; top: 50px; z-index: 999; display: none; width: 100vw;text-align: center;}
+#messageError{position: fixed; top: 50px;z-index: 999;display: none;width: 100vw;text-align: center;}
+
 
 /************************************************************************************************************
 *************************************************************************************************************

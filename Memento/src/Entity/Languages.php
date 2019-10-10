@@ -52,9 +52,9 @@ class Languages
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Articles", mappedBy="langId")
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy="articleLanguage")
      */
-    private $articlesLanguages;
+    private $languagesArticles;
 
     /**
      * @return int
@@ -113,18 +113,18 @@ class Languages
     /**
      * @return mixed
      */
-    public function getArticlesLanguages()
+    public function getLanguagesArticles()
     {
-        return $this->articlesLanguages;
+        return $this->languagesArticles;
     }
 
     /**
-     * @param mixed $articlesLanguages
+     * @param mixed $languagesArticles
      * @return Languages
      */
-    public function setArticlesLanguages($articlesLanguages)
+    public function setLanguagesArticles($languagesArticles)
     {
-        $this->articlesLanguages = $articlesLanguages;
+        $this->languagesArticles = $languagesArticles;
         return $this;
     }
 
