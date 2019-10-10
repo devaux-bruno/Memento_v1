@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * Likesystem
  *
  * @ORM\Table(name="likesystem", indexes={@ORM\Index(name="like_user_id", columns={"like_user_id"}), @ORM\Index(name="like_article_id", columns={"like_article_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\LikeSystemRepository")
  */
 class Likesystem
 {

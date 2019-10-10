@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method Articles|null find($id, $lockMode = null, $lockVersion = null)
  * @method Articles|null findOneBy(array $criteria, array $orderBy = null)
- * @method Articles[]    findAll()
  * @method Articles[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ArticlesRepository extends ServiceEntityRepository
@@ -19,5 +18,11 @@ class ArticlesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Articles::class);
     }
+
+    public function findAll()
+    {
+        return $this->findBy(array(),['articleCreateAt' => 'Desc']);
+    }
+
 
 }

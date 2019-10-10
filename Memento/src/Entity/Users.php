@@ -117,17 +117,17 @@ class Users implements UserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Articles", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy="articleUser")
      */
     private $usersArticles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comments", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="commentUser")
      */
     private $usersComments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Likesystem", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Likesystem", mappedBy="likeUser")
      */
     private $usersLikesystem;
 

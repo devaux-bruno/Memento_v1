@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Comments;
+use App\Entity\Languages;
+use App\Entity\Likesystem;
 use App\Form\AdminArticleType;
 use App\Form\ArticleType;
 use App\Form\CommentsType;
@@ -87,6 +89,19 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * @Route("article/lang/{langId}", name="article_by_languages")
+     */
+    public function indexLanguages(Languages $langId)
+    {
+        $doctrine = $this->getDoctrine();
+
+        $userRepository = $doctrine->getRepository(Articles::class);
+        $resultatedit= $userRepository->findBy(['articleLanguage' => $langId],['articleCreateAt' => 'Desc']);
+
+        return $this->render('home/index_languages.html.twig', ['resultatedit' => $resultatedit]);
+    }
+
+    /**
      * @Route("article/{articleId}", name="article")
      */
     public function readArticle(Articles $articleId)
@@ -97,11 +112,15 @@ class ArticlesController extends AbstractController
         $resultatArticle= $userRepository->find($articleId);
 
         $userComment = new Comments();
+
         $commentUser = $this->getUser();
         $request = $this->get('request_stack')->getMasterRequest();
 
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
+
+        $likeRepository = $doctrine->getRepository(Likesystem::class);
+        $resultatLike = $likeRepository->findIfUserAllReadyVote($commentUser, $articleId);
 
         $form = $this->createForm(CommentsType::class, $userComment);
         $form->handleRequest($request);
@@ -120,13 +139,15 @@ class ArticlesController extends AbstractController
             $this->addFlash('success', 'Le commentaire a bien été ajouté!');
 
             return $this->redirectToRoute('article',
-                ['articleId' => $articleId->getArticleId()]
-            );
+                ['resultatLike' => $resultatLike,
+                    'articleId' => $articleId->getArticleId(),
+                    '_fragment' => 'commentaires'
+                ]);
 
         }
 
-
         return $this->render('home/article.html.twig', [
+            'resultatLike' => $resultatLike,
             'resultatArticle' => $resultatArticle,
             'formAjoutcomment' => $form->createView(),
             ]);
@@ -460,6 +481,9 @@ class ArticlesController extends AbstractController
                 'resultatedit' => $resultatedit
             ]);
     }
+
+
+
 
     /**
      * @return string

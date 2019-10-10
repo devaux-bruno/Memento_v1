@@ -20,8 +20,8 @@ class CommentsController  extends AbstractController
     {
         $doctrine = $this->getDoctrine();
 
-        $userRepository = $doctrine->getRepository(Comments::class);
-        $resultatcomment= $userRepository->findAll();
+        $commentRepository = $doctrine->getRepository(Comments::class);
+        $resultatcomment= $commentRepository->findAll();
 
         return $this->render('admin/index_comment.html.twig', [
             'resultatcomment' => $resultatcomment
@@ -124,7 +124,7 @@ class CommentsController  extends AbstractController
     }
 
     /**
-     * @Route("/admin/editcomment/{commentId}", name="member_comment_edit")
+     * @Route("/member/editcomment/{commentId}", name="member_comment_edit")
      */
     public function editMemberComment(Request $request, Comments $commentId)
     {
@@ -168,9 +168,68 @@ class CommentsController  extends AbstractController
         $doctrine = $this->getDoctrine();
 
         $userRepository = $doctrine->getRepository(Comments::class);
-        $resultatComment= $userRepository->findby(['commentArticle'=> $articleId]);
+        $resultatComment= $userRepository->findby(['commentArticle'=> $articleId], ['commentCreatedAt' => 'Desc']);
 
         return $this->render('home/comment_read.html.twig',
             ['resultatComment' => $resultatComment]);
+    }
+
+
+    /**
+     * @Route("/member/comments-signaled/{commentId}", name="comments_signaled")
+     */
+    public function signaledComment(Request $request, Comments $commentId)
+    {
+        $idArticle = $commentId->getCommentArticle()->getArticleId();
+
+        $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
+
+        $commentId->setCommentStatus('signaled');
+
+        $entityManager->persist($commentId);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Merci! Le commentaire a bien été signalé et sera étudié!');
+
+        return $this->redirectToRoute('article', ['articleId'=> $idArticle]);
+    }
+
+    /**
+     * @Route("/Admin/comments-signaled/{commentId}", name="comments_status")
+     */
+    public function statusComment(Request $request, Comments $commentId)
+    {
+        $idUser = $this->getUser();
+
+        $commentUserId = $commentId->getCommentUser();
+        $statusUserComment = $idUser->getUserStatus();
+
+        if($idUser != $commentUserId && $statusUserComment == 'admin') {
+
+            $this->addFlash('error', 'Tu ne peux pas supprimmer les commentaires d\'un autre Admin!');
+            return $this->redirectToRoute('comments_index',[]);
+        }
+
+        $form = $this->createForm(CommentAdminType::class, $commentId, []);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && !$form->isEmpty() && $form->isValid()) {
+
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+
+            $entityManager->persist($commentId);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le commentaire a bien été modifier!');
+
+            return $this->redirectToRoute('comments_index', []);
+
+        }
+        return $this->render('admin/comments_admin_add.html.twig', [
+            'formAjoutcomment' => $form->createView(),
+        ]);
+
     }
 }

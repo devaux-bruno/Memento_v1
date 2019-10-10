@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * Articles
  *
  * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_user_id", columns={"article_user_id"}), @ORM\Index(name="article_language_id", columns={"article_language_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
  */
 class Articles
 {
@@ -84,7 +84,7 @@ class Articles
     /**
      * @var Languages
      *
-     * @ORM\ManyToOne(targetEntity="Languages", inversedBy="articlesLanguages")
+     * @ORM\ManyToOne(targetEntity="Languages", inversedBy="languagesArticles")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="article_language_id", referencedColumnName="lang_id")
      * })
@@ -92,12 +92,12 @@ class Articles
     private $articleLanguage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comments", mappedBy="articleId")
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="commentArticle")
      */
     private $articlesComments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Likesystem", mappedBy="articleId")
+     * @ORM\OneToMany(targetEntity="Likesystem", mappedBy="likeArticle")
      */
     private $articlesLikesystem;
 
@@ -246,7 +246,7 @@ class Articles
     }
 
     /**
-     * @return Languages
+     * @return mixed
      */
     public function getArticleLanguage()
     {
@@ -257,7 +257,7 @@ class Articles
      * @param Languages $articleLanguage
      * @return Articles
      */
-    public function setArticleLanguage($articleLanguage)
+    public function setArticleLanguage(?Languages $articleLanguage): ?Languages
     {
         $this->articleLanguage = $articleLanguage;
         return $this;
