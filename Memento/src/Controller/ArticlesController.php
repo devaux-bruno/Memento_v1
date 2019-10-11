@@ -101,6 +101,35 @@ class ArticlesController extends AbstractController
         return $this->render('home/index_languages.html.twig', ['resultatedit' => $resultatedit]);
     }
 
+
+
+
+    /**
+     * @Route("article/search/{resultatsearch}", name="article_search")
+     */
+    public function indexSearch($dataSearch)
+    {
+        $doctrine = $this->getDoctrine();
+        $articleRepository = $doctrine->getRepository(Articles::class);
+        $resultatsearch= $articleRepository->findArticleBySearch($dataSearch);
+
+        if($resultatsearch) {
+            $doctrine = $this->getDoctrine();
+            $articleRepository = $doctrine->getRepository(Articles::class);
+            $resultatsearch = $articleRepository->findArticleBySearch($resultatsearch);
+
+            return $this->render('home/index_search.html.twig', [
+                'resultatsearch' => $resultatsearch,
+            ]);
+        }
+        else {
+            return $this->render('home/index_search.html.twig', [
+                'resultatsearch' => $resultatsearch,
+                ]);
+        }
+    }
+
+
     /**
      * @Route("article/{articleId}", name="article")
      */

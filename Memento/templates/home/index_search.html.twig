@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if resultatsearch is empty %}
+        <p>Désolé, rien ne correspond à votre recherche</p>
+    {% else %}
+        {{ dump(resultatsearch) }}
+    {% endif %}
+{% endblock %}
