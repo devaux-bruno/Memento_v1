@@ -64,12 +64,7 @@
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-4 search">
-                    <form class="form-inline mt-2 mt-md-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher ..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img class="btnSearch" src="{{ asset('asset/img/search-solid.svg') }}" alt="Search"></button>
-                    </form>
-                </div>
+                {{ render(controller('App\\Controller\\SearchController::baseSearch')) }}
             </div>
         </header>
 
