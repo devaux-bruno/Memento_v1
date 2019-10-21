@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-5 mb-3">Me contacter</h1>
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 text-center">
+                {{ form_start(contact) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(contact) }}
+                    <span class="text-danger">{{ form_errors(contact.firstname) }}</span>
+                    <span class="text-danger">{{ form_errors(contact.lastname) }}</span>
+                    <span class="text-danger">{{ form_errors(contact.email) }}</span>
+                    <span class="text-danger">{{ form_errors(contact.subject) }}</span>
+                    <span class="text-danger">{{ form_errors(contact.message) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(contact.firstname) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(contact.lastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(contact.email) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(contact.subject) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(contact.message) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
+                        <input class="form-control mt-3 btn-primary" type="submit" value="Envoyer" />
+                        {{ form_end(contact) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('home') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

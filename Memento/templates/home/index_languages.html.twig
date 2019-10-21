@@ -3,9 +3,9 @@
 
 {% block body %}
     {% if resultatedit is empty %}
-    <p class="text-center mt-5 mb-5">Désolé, il n'y a pas encore d'article dans cette catégorie"</p>
+    <p class="text-center mt-5 mb-5">Désolé, il n'y a pas encore d'article dans cette catégorie</p>
     {% else %}
-    <h1 class="text-center mt-5 mb-5">Nos articles "{{ resultatedit[0].articleLanguage.langProgram }}"</h1>
+    <h1 class="text-center mt-5 mb-5">Memento en "{{ resultatedit[0].articleLanguage.langProgram }}"</h1>
     <div class="container-fluid">
         <div class="row justify-content-center">
             {% for article in resultatedit %}

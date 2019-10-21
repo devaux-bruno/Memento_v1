@@ -21,9 +21,9 @@
                     <div class="row navbar-nav list-nav ">
                         <div class="col-12 nav-item dropdown inlineFlex">
                             <a class="titreMenu" href="{{ path('news_article') }}">Nouveautés</a>
-                            <a class="titreMenu" href="#">Top Mementos</a>
-                            <a class="titreMenu" href="#">Actualités</a>
-                            <a class="titreMenu" href="#">Contact</a>
+                            <a class="titreMenu" href="{{ path('top_article') }}">Top Mementos</a>
+                            {#<a class="titreFooter" href="#">Actualités</a>#}
+                            <a class="titreMenu" href="{{ path('contact') }}">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,9 @@
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
                 </div>
-                {{ render(controller('App\\Controller\\SearchController::baseSearch')) }}
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 search">
+                    {{ render(controller('App\\Controller\\SearchController::baseSearch', {request : app.request})) }}
+                </div>
             </div>
         </header>
 
@@ -111,9 +113,9 @@
                     <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
                         <div class="gridCenter">
                             <a class="titreFooter" href="{{ path('news_article') }}">Nouveautés</a>
-                            <a class="titreFooter" href="#">Top Mementos</a>
-                            <a class="titreFooter" href="#">Actualités</a>
-                            <a class="titreFooter" href="#">Contact</a>
+                            <a class="titreFooter" href="{{ path('top_article') }}">Top Mementos</a>
+                            {#<a class="titreFooter" href="#">Actualités</a>#}
+                            <a class="titreFooter" href="{{ path('contact') }}">Contact</a>
                         </div>
                     </div>
                     <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">

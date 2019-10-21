@@ -25,6 +25,16 @@
                         <a class="signaledcomment" href="{{ path('comments_signaled', {'commentId' : comment.commentId}) }}">
                             Signaler ce commentaire
                         </a>
+                    {% if comment.commentUser  is same as (app.user)%}
+                        <a class="btn btn-warning"
+                           href="{{ path('member_comment_edit', {'commentId' : comment.commentId }) }}">
+                            Modifier
+                        </a>
+                        <a class="btn btn-danger"
+                           href="{{ path('member_comment_delete', {'commentId' : comment.commentId }) }}">
+                            Supprimer
+                        </a>
+                    {% endif %}
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 datecomment">
                         <span >le {{ comment.commentCreatedAt |date('d/m/Y à H:m:s') }}</span>

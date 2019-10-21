@@ -16,6 +16,7 @@ class BaseController extends AbstractController
         $languagesRepository = $doctrine->getRepository(Languages::class);
         $resultatedit= $languagesRepository->findAll();
 
+
         return $this->render('home/lang_list.html.twig', [
             'resultatshow' => $resultatedit,
         ]);
