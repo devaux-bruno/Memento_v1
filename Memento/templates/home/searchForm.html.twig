@@ -1,6 +1,4 @@
-<div class="col-12 col-sm-12 col-md-12 col-lg-4 search">
-    {{ form_start(resultatsearch) }}
-    {{ form_row(resultatsearch.term) }}
-    {{ form_row(resultatsearch.save) }}
-    {{ form_end(resultatsearch) }}
-</div>
+{{ form_start(resultatsearch, {'action': path('search')}) }}
+{{ form_row(resultatsearch.term) }}
+{{ form_row(resultatsearch.save) }}
+{{ form_end(resultatsearch) }}

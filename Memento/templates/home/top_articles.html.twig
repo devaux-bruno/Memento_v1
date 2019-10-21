@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Top 10 des Mementos</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            {% for article in resultatedit %}
+                {%  if article.article_valid is same as ('published') %}
+                    <a class="articleLien"  href="{{ path('article', {'articleId' : article.article_id}) }}">
+                        <div class="blockArticle">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 imageArticle">
+                                {% if article.article_picture is empty %}
+                                    <img class="ArticleNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
+                                {% else %}
+                                    <img class="ArticleLogo" src="{{ asset('asset/img/article/') }}{{ article.article_picture }}" alt="picture {{ article.article_title }}">
+                                {% endif %}
+                            </div>
+                            <div class=" col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 descArticle">
+                                <h2 class="mt-3">{{ article.article_title |capitalize }}</h2>
+                                <p>{{ article.article_description | raw }}</p>
+                                <div class="dateCreated">
+                                    <p class="datePerson">Écrit par {{ article.user_pseudo }} le {{ article.article_create_at |date('d/m/Y H:m:s') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -11,6 +11,7 @@ use App\Entity\Likesystem;
 use App\Form\AdminArticleType;
 use App\Form\ArticleType;
 use App\Form\CommentsType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -103,30 +104,20 @@ class ArticlesController extends AbstractController
 
 
 
-
     /**
-     * @Route("article/search/{resultatsearch}", name="article_search")
+     * @Route("search/{dataSearch}", name="article_search" , methods={"GET","POST"})
      */
-    public function indexSearch($dataSearch)
+    public function testSearch($dataSearch)
     {
+
         $doctrine = $this->getDoctrine();
         $articleRepository = $doctrine->getRepository(Articles::class);
         $resultatsearch= $articleRepository->findArticleBySearch($dataSearch);
 
-        if($resultatsearch) {
-            $doctrine = $this->getDoctrine();
-            $articleRepository = $doctrine->getRepository(Articles::class);
-            $resultatsearch = $articleRepository->findArticleBySearch($resultatsearch);
-
-            return $this->render('home/index_search.html.twig', [
-                'resultatsearch' => $resultatsearch,
-            ]);
-        }
-        else {
-            return $this->render('home/index_search.html.twig', [
-                'resultatsearch' => $resultatsearch,
-                ]);
-        }
+        return $this->render('home/index_search.html.twig', [
+            'resultatsearch' => $resultatsearch,
+            'dataSearch' => $dataSearch,
+        ]);
     }
 
 
@@ -499,7 +490,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/news", name="news_article")
      */
-    public function index()
+    public function indexNew()
     {
         $doctrine = $this->getDoctrine();
 
@@ -509,6 +500,20 @@ class ArticlesController extends AbstractController
         return $this->render('home/new_articles.html.twig',[
                 'resultatedit' => $resultatedit
             ]);
+    }
+
+    /**
+     * @Route("/top", name="top_article")
+     */
+    public function indexTop()
+    {
+        $doctrine = $this->getDoctrine();
+        $userRepository = $doctrine->getRepository(Likesystem::class);
+        $resultatedit= $userRepository->findTopMemento();
+
+        return $this->render('home/top_articles.html.twig',[
+            'resultatedit' => $resultatedit
+        ]);
     }
 
 
