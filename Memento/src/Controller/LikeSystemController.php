@@ -23,7 +23,7 @@ class LikeSystemController extends AbstractController
         $userLike = $doctrine->getRepository(Likesystem::class);
         $resultatlike = $userLike->findIfUserAllReadyVote($idUser, $articleId);
 
-        if($resultatlike === null)
+        if($resultatlike === null || empty($resultatlike))
         {
             $likeArticle = new Likesystem();
 
@@ -82,7 +82,7 @@ class LikeSystemController extends AbstractController
         $userLike = $doctrine->getRepository(Likesystem::class);
         $resultatlike = $userLike->findIfUserAllReadyVote($idUser, $articleId);
 
-        if($resultatlike === null)
+        if($resultatlike === null || empty($resultatlike))
         {
             $likeArticle = new Likesystem();
 

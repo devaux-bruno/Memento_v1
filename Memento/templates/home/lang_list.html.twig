@@ -1,5 +1,5 @@
 {% for languages in resultatshow %}
-    <li>
+    <li class="col-4 col-sm-4 col-md-2">
         <a href="{{ path('article_by_languages', { 'langId' : languages.langId }) }}">
             <img class="logoLanguages" src="{{ asset('asset/img/languages/') }}{{ languages.langPicture }}" alt="picture {{ languages.langProgram }}">
         </a>
