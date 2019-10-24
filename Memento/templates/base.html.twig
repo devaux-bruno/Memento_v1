@@ -2,17 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <title>{% block title %}Memento, le blog Dev qu'il vous faut!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
             <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('asset/img/favicon.ico') }}"/>
         {% endblock %}
     </head>
     <body>
     {% block nav %}
         <header>
-            <nav class="navbar navbar-expand-md navbar-light navcolor">
+            <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ path('home') }}"><img class="navbarLogo" src="{{ asset('asset/img/logo-memento.png') }}" alt="logo"></a>
                 <button id="btnMenu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -60,7 +62,7 @@
             </nav>
             <div class="row justify-content-center prolongNavbar">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-8 center menuLangue">
-                    <ul class="languagesList">
+                    <ul class="languagesList row center">
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
                 </div>
@@ -96,7 +98,7 @@
         {% block footer %}
             <footer class="mt-5">
                 <div class="row justify-content-center mt-3 footer">
-                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                    <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                         <p class="contact">
                             <span class="bold">Me contacter</span>
                         <br>
@@ -110,7 +112,7 @@
                             <a target="_blank" href="#"><img class="logoSociaux" alt="logo Instagram" src="{{ asset('asset/img/twitter-square-brands.svg') }}"></a>
                         </div>
                     </div>
-                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                    <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                         <div class="gridCenter">
                             <a class="titreFooter" href="{{ path('news_article') }}">Nouveautés</a>
                             <a class="titreFooter" href="{{ path('top_article') }}">Top Mementos</a>
@@ -118,7 +120,7 @@
                             <a class="titreFooter" href="{{ path('contact') }}">Contact</a>
                         </div>
                     </div>
-                    <div class="col-12 xol-sm-12 col-md-4 justify-content-center mt-3 mb-3">
+                    <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                         <div class="gridCenter">
                             <a class="titreFooter" href="#">Mentions légales</a>
                             <a class="titreFooter" href="#">Politique de confidentialité</a>
@@ -127,7 +129,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center footer">
-                    <ul class="languagesList">
+                    <ul class="languagesList row center">
                         {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
                     </ul>
                 </div>

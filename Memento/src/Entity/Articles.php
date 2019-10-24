@@ -239,7 +239,7 @@ class Articles
      * @param Users $articleUser
      * @return Articles
      */
-    public function setArticleUser(Users $articleUser): Users
+    public function setArticleUser($articleUser)
     {
         $this->articleUser = $articleUser;
         return $this;
@@ -257,7 +257,7 @@ class Articles
      * @param Languages $articleLanguage
      * @return Articles
      */
-    public function setArticleLanguage(?Languages $articleLanguage): ?Languages
+    public function setArticleLanguage( $articleLanguage)
     {
         $this->articleLanguage = $articleLanguage;
         return $this;
