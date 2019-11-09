@@ -11,7 +11,8 @@ use App\Entity\Likesystem;
 use App\Form\AdminArticleType;
 use App\Form\ArticleType;
 use App\Form\CommentsType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -24,7 +25,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("member/addArticle", name="article_add")
      */
-    public function addArticle(Request $request)
+    public function addArticle(Request $request,  Swift_Mailer $mailer)
     {
         $article = new Articles();
 
@@ -65,6 +66,25 @@ class ArticlesController extends AbstractController
 
             $entityManager->persist($article);
             $entityManager->flush();
+
+            $contactMail = $user->getUserEmail();
+            $contactFirstname =  $user->getUserFirstname();
+            $contactLastname  = $user->getUserLastname();
+
+            $message = (new Swift_Message('Nouveau message de contact - Memento'))
+                ->setFrom($contactMail)
+                ->setTo('contact@devaux-bruno.com')
+                ->setBody(
+                    $this->renderView('email/article_mail.html.twig', [
+                        'prenom' => $contactFirstname,
+                        'nom' => $contactLastname,
+                    ]),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
+
 
             $this->addFlash('success', 'Votre Article a bien été enregistré, il sera publié après validation!');
 
@@ -390,9 +410,9 @@ class ArticlesController extends AbstractController
     /**
      * @Route("member/Article-edit/{articleId}", name="member_article_edit")
      */
-    public function memberArticleEdit(Request $request, Articles $articleId)
+    public function memberArticleEdit(Request $request, Articles $articleId,  Swift_Mailer $mailer)
     {
-
+        $user = $this->getUser();
         $idUser = $this->getUser()->getUserId();
         $numIdUser = $articleId->getArticleUser()->getUserId();
 
@@ -475,6 +495,24 @@ class ArticlesController extends AbstractController
 
             $entityManager->persist($articleId);
             $entityManager->flush();
+
+            $contactMail = $user->getUserEmail();
+            $contactFirstname =  $user->getUserFirstname();
+            $contactLastname  = $user->getUserLastname();
+
+            $message = (new Swift_Message('Nouveau message de contact - Memento'))
+                ->setFrom($contactMail)
+                ->setTo('contact@devaux-bruno.com')
+                ->setBody(
+                    $this->renderView('email/article_mail.html.twig', [
+                        'prenom' => $contactFirstname,
+                        'nom' => $contactLastname,
+                    ]),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
 
             $this->addFlash('success', 'L\'article a bien été modifié!');
 
