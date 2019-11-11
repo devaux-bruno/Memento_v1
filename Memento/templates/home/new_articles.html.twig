@@ -3,30 +3,39 @@
 
 {% block body %}
 <h1 class="text-center mt-5 mb-5">Nos derniers Memento</h1>
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        {% for article in resultatedit %}
+<div class="container">
+    <div class="row justify-content-center center">
+        <table>
+        {% for article in pagination %}
             {%  if article.articleValid is same as ('published') %}
-                <a class="articleLien"  href="{{ path('article', {'articleId' : article.articleId}) }}">
-                    <div class="blockArticle">
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 imageArticle">
-                            {% if article.articlePicture is empty %}
-                                <img class="ArticleNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
-                            {% else %}
-                                <img class="ArticleLogo" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleTitle }}">
-                            {% endif %}
-                        </div>
-                        <div class=" col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 descArticle">
-                                <h2 class="mt-3">{{ article.articleTitle |capitalize }}</h2>
-                                <p>{{ article.articleDescription | raw }}</p>
-                            <div class="dateCreated">
-                                <p class="datePerson">Écrit par {{ article.articleUser.userPseudo }} le {{ article.articleCreateAt |date('d/m/Y H:m:s') }}</p>
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <a class="articleLien"  href="{{ path('article', {'articleId' : article.articleId}) }}">
+                        <div class="row blockArticle">
+                            <div class="col-12 imageArticle">
+                                {% if article.articlePicture is empty %}
+                                    <img class="ArticleNoPic" src="{{ asset('asset/img/user_nopic.png') }}" alt="no picture">
+                                {% else %}
+                                    <img class="ArticleLogo" src="{{ asset('asset/img/article/') }}{{ article.articlePicture }}" alt="picture {{ article.articleTitle }}">
+                                {% endif %}
+                            </div>
+                            <div class=" col-12 descArticle">
+                                    <h2 class="mt-3">{{ article.articleTitle |capitalize }}</h2>
+                                    <p>{{ article.articleDescription | raw }}</p>
+                                <div class="dateCreated">
+                                    <p class="datePerson">Écrit par {{ article.articleUser.userPseudo }} le {{ article.articleCreateAt |date('d/m/Y H:m:s') }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+            </tr>
             {% endif %}
         {% endfor %}
+        </table>
+        <div class="col-12 navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
 </div>
 {% endblock %}

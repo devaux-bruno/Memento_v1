@@ -1,5 +1,6 @@
 {
     "require": {
-        "symfony/mailer": "^4.3"
+        "symfony/mailer": "^4.3",
+        "knplabs/knp-paginator-bundle": "^4.0"
     }
 }

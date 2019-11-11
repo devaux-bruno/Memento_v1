@@ -98,7 +98,6 @@ class CommentsController  extends AbstractController
     public function deleteMemberComment(Comments $commentId)
     {
         $idUser = $this->getUser();
-
         $commentUserId = $commentId->getCommentUser();
 
         if($idUser != $commentUserId) {

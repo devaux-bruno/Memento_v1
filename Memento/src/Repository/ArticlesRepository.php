@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Articles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -35,5 +36,13 @@ class ArticlesRepository extends ServiceEntityRepository
             ;
     }
 
-
+    public function findArticleByLang($term): Query
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.articleLanguage = :val1')
+            ->setParameter('val1', $term)
+            ->orderBy('p.articleCreateAt', 'DESC')
+            ->getQuery()
+            ;
+    }
 }

@@ -23,6 +23,8 @@
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/fig/link-util" />
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/jdorn/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/knplabs/knp-components" />
+      <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/knplabs/knp-paginator-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/Memento/vendor/ocramius/package-versions" />

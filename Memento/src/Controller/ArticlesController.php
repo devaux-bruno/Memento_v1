@@ -11,6 +11,7 @@ use App\Entity\Likesystem;
 use App\Form\AdminArticleType;
 use App\Form\ArticleType;
 use App\Form\CommentsType;
+use Knp\Component\Pager\PaginatorInterface;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -112,14 +113,21 @@ class ArticlesController extends AbstractController
     /**
      * @Route("article/lang/{langId}", name="article_by_languages")
      */
-    public function indexLanguages(Languages $langId)
+    public function indexLanguages(Languages $langId,Request $request, PaginatorInterface $paginator)
     {
         $doctrine = $this->getDoctrine();
 
         $userRepository = $doctrine->getRepository(Articles::class);
-        $resultatedit= $userRepository->findBy(['articleLanguage' => $langId],['articleCreateAt' => 'Desc']);
+        $resultatedit= $userRepository->findArticleByLang($langId);
 
-        return $this->render('home/index_languages.html.twig', ['resultatedit' => $resultatedit]);
+
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+
+        return $this->render('home/index_languages.html.twig', ['pagination' => $pagination]);
     }
 
 
@@ -127,15 +135,21 @@ class ArticlesController extends AbstractController
     /**
      * @Route("search/{dataSearch}", name="article_search" , methods={"GET","POST"})
      */
-    public function testSearch($dataSearch)
+    public function testSearch($dataSearch, Request $request, PaginatorInterface $paginator)
     {
 
         $doctrine = $this->getDoctrine();
         $articleRepository = $doctrine->getRepository(Articles::class);
         $resultatsearch= $articleRepository->findArticleBySearch($dataSearch);
 
+        $pagination = $paginator->paginate(
+            $resultatsearch, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+
         return $this->render('home/index_search.html.twig', [
-            'resultatsearch' => $resultatsearch,
+            'pagination' => $pagination,
             'dataSearch' => $dataSearch,
         ]);
     }
@@ -528,15 +542,21 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/news", name="news_article")
      */
-    public function indexNew()
+    public function indexNew(Request $request, PaginatorInterface $paginator)
     {
         $doctrine = $this->getDoctrine();
 
         $userRepository = $doctrine->getRepository(Articles::class);
         $resultatedit= $userRepository->findAll();
 
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+
         return $this->render('home/new_articles.html.twig',[
-                'resultatedit' => $resultatedit
+                'pagination' => $pagination
             ]);
     }
 
@@ -548,6 +568,7 @@ class ArticlesController extends AbstractController
         $doctrine = $this->getDoctrine();
         $userRepository = $doctrine->getRepository(Likesystem::class);
         $resultatedit= $userRepository->findTopMemento();
+
 
         return $this->render('home/top_articles.html.twig',[
             'resultatedit' => $resultatedit

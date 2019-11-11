@@ -152,8 +152,11 @@ class Users implements UserInterface
         if($this->getUserStatus() == 'admin'){
             return ['ROLE_ADMIN'];
         }
-        else{
+        elseif($this->getUserStatus() == 'member'){
             return ['ROLE_MEMBER'];
+        }
+        else{
+            return ['IS_AUTHENTICATED_ANONYMOUSLY'];
         }
     }
 
